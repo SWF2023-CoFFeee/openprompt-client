@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Box, Container } from '@mui/material';
+import { Box, Container, SxProps } from '@mui/material';
 import { Background } from '@/components/common/CustomUI/background';
 
 import { CustomBackButton } from '@/components/common/CustomUI/button/CustomBackButton';
@@ -11,6 +11,7 @@ interface TemplateProps {
   variant?: TBackgroundVariant; // default는 'basic'으로 설정
   bgcolor?: TBackgroundColor;
   withBackButton?: boolean;
+  sx?: SxProps;
 }
 
 const Template: React.FC<TemplateProps> = ({
@@ -18,6 +19,7 @@ const Template: React.FC<TemplateProps> = ({
   variant = 'basic',
   bgcolor,
   withBackButton = false,
+  sx,
 }) => {
   return (
     <Background variant={variant} color={bgcolor}>
@@ -33,6 +35,7 @@ const Template: React.FC<TemplateProps> = ({
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
+            ...sx,
           }}
         >
           {children}

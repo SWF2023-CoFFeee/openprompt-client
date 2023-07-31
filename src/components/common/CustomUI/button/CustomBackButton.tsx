@@ -8,10 +8,12 @@ export type CustomBackButtonVariant = 'outlined' | 'fill';
 
 interface CustomBackButtonProps {
   variant?: CustomBackButtonVariant;
+  sx?: React.CSSProperties;
 }
 
 export const CustomBackButton: React.FC<CustomBackButtonProps> = ({
   variant = 'fill',
+  sx,
 }) => {
   const navigate = useNavigate();
 
@@ -19,6 +21,8 @@ export const CustomBackButton: React.FC<CustomBackButtonProps> = ({
     <IconButton
       sx={{
         display: 'inline-flex',
+        width: '38px',
+        height: '38px',
         alignItems: 'center',
         justifyContent: 'center',
         border: variant === 'outlined' ? '1px solid white' : 'none',
