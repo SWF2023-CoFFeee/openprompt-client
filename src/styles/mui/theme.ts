@@ -2,9 +2,9 @@ import { createTheme } from '@mui/material/styles';
 import palette from './palette';
 import typography from './typography';
 
-export const darkHover = {
+export const primaryHover = {
   '&:hover': {
-    backgroundColor: palette.grey[600],
+    backgroundColor: '#79B21C',
   },
 };
 
@@ -107,11 +107,16 @@ const theme = createTheme({
           },
           // TextField outlined
           '& .MuiOutlinedInput-root': {
+            padding: '0px',
+            borderRadius: '7px',
+            '& input': {
+              padding: '10px 13px',
+            },
             '& fieldset': {
-              borderColor: palette.grey[300],
+              borderColor: palette.white,
             },
             '&:hover fieldset': {
-              borderColor: palette.grey[300],
+              borderColor: palette.white,
             },
             '&.Mui-focused fieldset': {
               borderColor: palette.primary.main,
@@ -120,6 +125,7 @@ const theme = createTheme({
         },
       },
     },
+    //MuiDisabled outline white만들기
     MuiInputBase: {
       styleOverrides: {
         root: {
@@ -172,7 +178,7 @@ const theme = createTheme({
             backgroundColor: 'rgba(5, 12, 26, 0.6)',
             padding: '5px 20px',
             minWidth: '70px',
-            ...darkHover,
+            ...primaryHover,
           },
         },
         {
@@ -183,7 +189,7 @@ const theme = createTheme({
             backgroundColor: 'rgba(5, 12, 26, 0.6)',
             padding: '7px 30px',
             minWidth: '90px',
-            ...darkHover,
+            ...primaryHover,
           },
         },
         {
@@ -194,7 +200,7 @@ const theme = createTheme({
             backgroundColor: 'rgba(5, 12, 26, 0.6)',
             padding: '9px 40px',
             minWidth: '110px',
-            ...darkHover,
+            ...primaryHover,
           },
         },
         {
@@ -239,7 +245,7 @@ const theme = createTheme({
             borderRadius: '150px',
             color: '#FFFFFF',
             backgroundColor: palette.black.main,
-            ...darkHover,
+            ...primaryHover,
           },
         },
         {
@@ -250,7 +256,7 @@ const theme = createTheme({
             borderRadius: '150px',
             color: '#FFFFFF',
             backgroundColor: palette.black.main,
-            ...darkHover,
+            ...primaryHover,
           },
         },
         {
@@ -261,7 +267,7 @@ const theme = createTheme({
             borderRadius: '150px',
             color: '#FFFFFF',
             backgroundColor: palette.black.main,
-            ...darkHover,
+            ...primaryHover,
           },
         },
 

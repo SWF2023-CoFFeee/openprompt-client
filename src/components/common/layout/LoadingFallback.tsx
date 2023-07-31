@@ -1,5 +1,11 @@
+import Template from '../CustomUI/template';
+
 const LoadingFallback = () => {
-  return <>Loading...</>;
+  return (
+    <Template>
+      <>Loading...</>
+    </Template>
+  );
 };
 
 export default LoadingFallback;
