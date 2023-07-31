@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import {
   Box,
   Container,
@@ -26,10 +26,6 @@ const MetaIcon = () => {
 
 const ProductRegisterPage = () => {
   const [selectedColor, setSelectedColor] = useState<string>('');
-
-  const handleColorChange = (event: ChangeEvent<{ value: unknown }>) => {
-    setSelectedColor(event.target.value as string);
-  };
 
   return (
     <Template>

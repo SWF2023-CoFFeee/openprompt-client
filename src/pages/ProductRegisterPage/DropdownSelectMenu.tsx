@@ -5,11 +5,10 @@ import {
   FormControl,
   Select,
   Theme,
-  SvgIconProps,
   Box,
 } from '@mui/material';
-import { ArrowDropDown } from '@mui/icons-material';
 import { SxProps } from '@mui/system';
+import palette from '@/styles/mui/palette';
 
 const ArrowIcon = () => {
   return (
@@ -60,17 +59,21 @@ const customStyles: {
     },
   },
   menuItem: {
+    color: palette.grey[400],
     '&:hover': {
       backgroundColor: 'rgba(174, 255, 41, 0.1)',
     },
     position: 'relative',
+    paddingLeft: '15%',
+    paddingTop: '10px',
+    paddingBottom: '10px',
   },
   borderBottom: {
     position: 'absolute',
     bottom: 0,
     left: '15%', // (100% - 70%) / 2
     width: '70%',
-    borderBottom: '1px solid white',
+    borderBottom: `1px solid ${palette.grey[400]}`,
   },
   menuPaper: {
     // 추가
@@ -87,14 +90,18 @@ const DropdownSelectMenu: React.FC<DropdownTextFieldProps> = ({
   selectedValue,
   onChange,
 }) => {
+  // selectedValue의 기본값을 첫 번째 옵션의 값으로 설정
+  const defaultValue = options[0]?.value || '';
+  const currentValue = selectedValue || defaultValue;
+
   return (
     <FormControl variant="outlined" fullWidth sx={customStyles.root}>
       <Select
-        value={selectedValue}
+        value={currentValue} // 수정된 값 사용
         onChange={(event) => onChange(event.target.value as string)}
         input={
           <OutlinedInput
-            placeholder={selectedValue ? '' : label}
+            placeholder={currentValue ? '' : label}
             sx={customStyles.input}
             endAdornment={<ArrowIcon />}
           />
