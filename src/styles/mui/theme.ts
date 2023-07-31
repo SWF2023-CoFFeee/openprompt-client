@@ -26,6 +26,15 @@ const theme = createTheme({
       },
       variants: [
         {
+          props: { variant: 'h3' },
+          style: {
+            fontFamily: 'Oswald',
+            fontWeight: 'bold',
+            fontSize: '38px',
+            lineHeight: 'auto',
+          },
+        },
+        {
           props: { variant: 'body3' },
           style: {
             fontWeight: 'normal',
@@ -44,10 +53,20 @@ const theme = createTheme({
           },
         },
         {
-          props: { variant: 'button1' },
+          props: { variant: 'body5' },
           style: {
+            fontFamily: 'Oswald',
             fontWeight: 'medium',
-            fontSize: '24px',
+            fontSize: '14px',
+            lineHeight: 'auto',
+          },
+        },
+        {
+          props: { variant: 'button' },
+          style: {
+            fontFamily: 'Oswald',
+            fontWeight: 'medium',
+            fontSize: '18px',
             lineHeight: 'auto',
             display: 'block',
           },
@@ -136,6 +155,10 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           textTransform: 'none', // 소문자 허용 override
+          fontSize: '16px',
+          fontWeight: 'medium',
+          fontFamily: 'Oswald',
+          lineHeight: 'auto',
         },
       },
       variants: [

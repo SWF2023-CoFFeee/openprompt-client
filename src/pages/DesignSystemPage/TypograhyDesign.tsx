@@ -36,8 +36,9 @@ export const TypographyDesign = () => {
           <InnerBoxLeft
             sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
           >
-            <Typography variant="h1">h1</Typography>
+            <Typography variant="h1">H1</Typography>
             <Typography variant="h2">h2</Typography>
+            <Typography variant="h3">h3</Typography>
             <br />
             <br />
             <Typography variant="subtitle1">subtitle1</Typography>
@@ -48,11 +49,12 @@ export const TypographyDesign = () => {
             <Typography variant="body2">body2</Typography>
             <Typography variant="body3">body3</Typography>
             <Typography variant="body4">body4</Typography>
-            <Typography variant="body4" color="primary">
-              body4 priamry
+            <Typography variant="body5">body5</Typography>
+            <Typography variant="body5" color="primary">
+              body5 priamry
             </Typography>
-            <Typography variant="body4" color="black.main">
-              body4 black
+            <Typography variant="body5" color="black.main">
+              body5 black
             </Typography>
           </InnerBoxLeft>
           <Box sx={{ width: '70%', marginLeft: '2rem' }}>
@@ -126,8 +128,17 @@ export const TypographyDesign = () => {
             <br />
             {`lineHeight: 'auto'`}
             <Typography color="primary">{`<Typography variant="body4">body4</Typography>`}</Typography>
-            <Typography color="primary">{`<Typography variant="body4" color="primary">body4 black</Typography>`}</Typography>
-            <Typography color="primary">{`<Typography variant="body4" color="black.main">body4 black</Typography>`}</Typography>
+            <br />
+
+            {/* body5 styles */}
+            {`fontWeight: 'bold'`}
+            <br />
+            {`fontSize: '24px'`}
+            <br />
+            {`lineHeight: 'auto'`}
+            <Typography color="primary">{`<Typography variant="body5">body5</Typography>`}</Typography>
+            <Typography color="primary">{`<Typography variant="body5" color="primary">body5 black</Typography>`}</Typography>
+            <Typography color="primary">{`<Typography variant="body5" color="black.main">body5 black</Typography>`}</Typography>
             <br />
           </Box>
         </StyledBoxOutlined>

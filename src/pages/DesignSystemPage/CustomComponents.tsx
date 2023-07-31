@@ -1,6 +1,5 @@
 import { Typography, Box, Container } from '@mui/material';
 import { useState, useRef } from 'react';
-
 import CustomCardOutlinedGradient from '@/components/common/CustomUI/card/CustomCardOutlinedGradient';
 import CustomCardOutlinedRounded from '@/components/common/CustomUI/card/CustomCardOutlinedRounded';
 import CustomTabs, {
@@ -162,6 +161,14 @@ export const CustomComponents = () => {
             </Box>
           </Container>
         </Box>
+      </StyledBox>
+      <StyledBox>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
       </StyledBox>
     </StyledBox>
   );

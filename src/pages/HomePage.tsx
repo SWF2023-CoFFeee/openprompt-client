@@ -5,7 +5,7 @@ import Template from '@/components/common/CustomUI/template';
 const HomePage = () => {
   return (
     <Template variant="gradient">
-      <Typography variant="h4">Home</Typography>
+      <Typography variant="h4"></Typography>
     </Template>
   );
 };

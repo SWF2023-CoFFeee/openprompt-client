@@ -12,7 +12,8 @@ declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {
     body3: true;
     body4: true;
-    button1: true;
+    body5: true;
+    button: true;
   }
 }
 
