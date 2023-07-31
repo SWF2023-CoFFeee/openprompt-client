@@ -161,7 +161,7 @@ const MarketPage = () => {
               sx={{
                 display: 'flex', // 요소들을 가로로 배치하기 위해 flex 사용
                 justifyContent: 'space-between', // 요소들을 양 끝으로 정렬
-                width: '80%', // Box의 너비 설정 (필요에 따라 조정)
+                width: '85%', // Box의 너비 설정 (필요에 따라 조정)
               }}
             >
               <Box
@@ -236,13 +236,11 @@ const MarketPage = () => {
                 />
                 <Typography variant="body1">Stable Diffusion</Typography>
               </Box>
-              {/* 필요한 만큼 카테고리 추가 */}
             </Box>
           </Box>
         </Box>
         <Box sx={{ marginY: '10px' }}></Box>
         <Container
-          // maxWidth="md"
           sx={{
             minHeight: '500px',
             width: '100%',

@@ -26,8 +26,8 @@ const CustomChip: React.FC<CustomChipProps> = ({ AI_type }) => {
         label={AI_type}
         icon={AI_type_icon}
         sx={{
-          width: '100%',
-          height: '30px',
+          minWidth: '40%',
+          height: '25px',
           backgroundColor: palette.grey[600],
           color: 'white',
           marginBottom: '20px',

@@ -1,15 +1,18 @@
+import { useState } from 'react';
 import {
   Box,
   Card,
-  CardActionArea,
   CardContent,
-  CardMedia,
   Container,
   Grid,
   Typography,
-  Chip,
+  IconButton,
+  Avatar,
+  CardActions,
+  Button,
 } from '@mui/material';
-import styled from '@emotion/styled';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import palette from '@/styles/mui/palette';
 import CustomChip from './CustomChip';
 interface IProduct {
@@ -77,40 +80,48 @@ const ContentTicket: React.FC<IProductListProps> = ({ products }) => {
   );
 };
 
-const TopGradientOverlay = styled('div')`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 30%;
-  background: linear-gradient(
-    -180deg,
-    rgba(128, 128, 128, 1) 0%,
-    rgba(128, 128, 128, 0) 70%
-  );
-
-  border-radius: 4px;
-  z-index: 0;
-`;
-const DownGradientOverlay = styled('div')`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 30%;
-  background: linear-gradient(
-    180deg,
-    rgba(128, 128, 128, 0) 30%,
-    rgba(128, 128, 128, 1) 100%
-  );
-
-  border-radius: 4px;
-  z-index: 0;
-`;
-
 export { ContentCopyRight, ContentTicket };
 
+function stringAvatar(name: string) {
+  return {
+    sx: {
+      bgcolor: stringToColor(name),
+    },
+    children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+  };
+}
+
+function stringToColor(string: string) {
+  let hash = 0;
+  let i;
+
+  /* eslint-disable no-bitwise */
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  let color = '#';
+
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.slice(-2);
+  }
+  /* eslint-enable no-bitwise */
+
+  return color;
+}
+
 const CardExample: React.FC<ICardExampleProps> = ({ product }) => {
+  const [liked, setLiked] = useState(false);
+  const handleLikeClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setLiked(!liked);
+  };
+
+  const capturingClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
   return (
     <Card
       sx={{
@@ -118,85 +129,138 @@ const CardExample: React.FC<ICardExampleProps> = ({ product }) => {
         maxWidth: '300px',
         maxHeight: '300px',
         borderRadius: '0.8rem',
-        border: `solid 1px ${palette.grey[400]}`,
       }}
     >
-      <CardActionArea>
-        <Box sx={{ position: 'relative' }}>
-          <CardMedia
-            component="img"
-            width="100%"
-            height="160px"
-            image={product.thumbNail}
-            alt="card image"
+      <Box
+        sx={{
+          backgroundImage: `url(${product.thumbNail})`,
+          display: 'flex',
+          width: '300px',
+          height: '300px',
+          objectFit: 'cover',
+          borderRadius: '0.8rem',
+          backgroundColor: '#000000',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <Box>
+          <Box
             sx={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              borderRadius: '0.8rem',
-              backgroundColor: '#000000',
-            }}
-          />
-          <CardContent
-            sx={{
-              padding: 1,
               display: 'flex',
-              flexDirection: 'column',
-              position: 'absolute',
-              width: '100%',
-              color: 'white',
-              top: 0,
-              left: 0,
-              zIndex: 1,
+              width: '300px',
+              height: '100%',
+              background: `linear-gradient(-180deg, rgba(0, 0, 0, 1) 0%, rgba(128, 128, 128, 0) 30%), linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(128, 128, 128, 0) 30%)`,
+              backgroundRepeat: 'no-repeat, no-repeat',
+              backgroundPosition: 'top center, bottom center',
             }}
           >
-            <Box
+            <Button
+              onClick={(e) => capturingClick(e)}
               sx={{
-                display: 'grid',
-                columnGap: '16px',
-                gridTemplateColumns: '99.5px 110px',
-                width: '247px',
-                height: '81.813px',
+                display: 'flex',
+                width: '100%',
+                height: '100%',
+                p: '0',
               }}
             >
-              <Typography variant="body1" color={palette.grey[300]}>
-                UserName
-              </Typography>
-              <CustomChip AI_type={product.prompt_type} />
-            </Box>
-            <Box
-              sx={{
-                display: 'grid',
-                columnGap: '16px',
-                gridTemplateColumns: '115.5px 115.5px',
-                width: '247px',
-                height: '81.813px',
-                placeItems: 'center',
-              }}
-            ></Box>
-            <Box
-              sx={{
-                display: 'grid',
-                columnGap: '16px',
-                gridTemplateColumns: '115.5px 115.5px',
-                width: '247px',
-                height: '81.813px',
-                placeItems: 'center',
-              }}
-            >
-              <Box>
-                <Typography variant="subtitle1">{product.id}</Typography>
-                <Typography variant="subtitle2">{product.price}</Typography>
-              </Box>
-              <Box>
-                <Typography variant="body2">{product.like}</Typography>
-              </Box>
-            </Box>
-          </CardContent>
-          <TopGradientOverlay />
-          <DownGradientOverlay />
+              <CardActions
+                sx={{
+                  display: 'flex',
+                  width: '100%',
+                  height: '100%',
+                  p: '0',
+                }}
+              >
+                <CardContent
+                  sx={{
+                    display: 'flex',
+                    width: '100%',
+                    height: '100%',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    paddingLeft: '5',
+                    paddingRight: '5',
+                    paddingTop: '5',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      width: '100%',
+                      height: '30%',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'flex-start',
+                    }}
+                  >
+                    <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                      <Avatar
+                        variant="rounded"
+                        {...stringAvatar('Kent Dodds')}
+                        sx={{ width: 26, height: 26, marginRight: '10px' }}
+                      />
+                      <Typography
+                        sx={{ flex: 1 }}
+                        variant="body1"
+                        color={palette.grey[300]}
+                      >
+                        UserName
+                      </Typography>
+                    </Box>
+                    <CustomChip AI_type={product.prompt_type} />
+                  </Box>
+
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      width: '100%',
+                      height: '30%',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'flex-end',
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
+                      }}
+                    >
+                      <Typography variant="subtitle2">{product.id}</Typography>
+                      <Typography variant="subtitle2">
+                        {product.price}
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'flex-end',
+                      }}
+                    >
+                      <Typography variant="body2">{product.like}</Typography>
+                      <IconButton
+                        sx={{
+                          display: 'flex',
+                          justifyContent: 'flex-end',
+                          color: 'white',
+                        }}
+                        onClick={(e) => handleLikeClick(e)}
+                      >
+                        {liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+                      </IconButton>
+                    </Box>
+                  </Box>
+                </CardContent>
+              </CardActions>
+            </Button>
+          </Box>
         </Box>
-      </CardActionArea>
+      </Box>
     </Card>
   );
 };
