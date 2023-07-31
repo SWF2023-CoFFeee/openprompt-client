@@ -1,6 +1,6 @@
 import { MetaMaskInpageProvider } from '@metamask/providers';
 import Web3 from 'web3';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ADDR_TOKEN_KEY, BALANCE_TOKEN_KEY } from '@/constants/token';
 import { useLocalStorage } from './useLocalStorage';
 
@@ -51,11 +51,14 @@ export const useWeb3 = () => {
     return _userAddr;
   };
 
-  const getBalance = async (_web3: Web3, _userAddr: string) => {
-    const _balance = await _web3.eth.getBalance(_userAddr);
+  const getBalance = useCallback(
+    async (_web3: Web3, _userAddr: string) => {
+      const _balance = await _web3.eth.getBalance(_userAddr);
 
-    setUserBalance(String(Number(_balance) / 10 ** 18));
-  };
+      setUserBalance(String(Number(_balance) / 10 ** 18));
+    },
+    [setUserBalance],
+  );
 
   const fireTransaction = async (to: string, amount: string) => {
     if (userAddr) {
@@ -76,7 +79,7 @@ export const useWeb3 = () => {
     }
   };
 
-  const getTransactionsByAccount = async () => {
+  const getTransactionsByAccount = useCallback(async () => {
     const _transactions = [];
     const startBlockNumber = 0;
     let endBlockNumber;
@@ -101,7 +104,7 @@ export const useWeb3 = () => {
 
       setTractions(_transactionsByAccount);
     }
-  };
+  }, [web3, userAddr, setTractions]);
 
   useEffect(() => {
     (async function () {
@@ -134,6 +137,7 @@ export const useWeb3 = () => {
   }, [getTransactionsByAccount, web3]);
 
   return {
+    userAddr,
     web3,
     transactions,
     fireTransaction,

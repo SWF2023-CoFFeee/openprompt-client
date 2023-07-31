@@ -31,8 +31,20 @@ const ConnectAddrSection = ({ onSwitchAuthStep }: IConnectAddrSectionProps) => {
           If you already have an account register ?
         </Typography>
 
-        <Button type="button" variant="outlined" onClick={onConnect}>
-          <img src={MetaMaskImage} alt="MetaMaskIcon" />
+        <Button
+          type="button"
+          variant="roundedOutlined"
+          onClick={onConnect}
+          sx={{
+            color: 'primary.main',
+            borderColor: 'primary.main',
+          }}
+        >
+          <img
+            src={MetaMaskImage}
+            alt="MetaMaskIcon"
+            style={{ marginRight: '16px' }}
+          />
           MetaMask
         </Button>
       </Stack>

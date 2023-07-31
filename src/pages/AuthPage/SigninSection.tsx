@@ -63,7 +63,7 @@ const SigninSection = ({ onSwitchAuthStep }: ISigninSectionProps) => {
         </Typography>
       </Typography>
       <form onSubmit={onSubmitSigninFormData}>
-        <Stack gap="40px" sx={{ width: '100%' }}>
+        <Stack gap="40px" sx={{ width: '100%', mb: '168px' }}>
           <TextField
             color="primary"
             label="Username"
@@ -86,6 +86,7 @@ const SigninSection = ({ onSwitchAuthStep }: ISigninSectionProps) => {
               '& .MuiFormLabel-root': {
                 fontWeight: '500',
                 fontSize: '14px',
+                color: palette.white,
               },
               '& .MuiInput-underline:before': {
                 borderBottom: `2px solid ${palette.white}`,
@@ -149,20 +150,18 @@ const SigninSection = ({ onSwitchAuthStep }: ISigninSectionProps) => {
               },
             }}
           />
-          <Button
-            variant="rounded"
-            type="submit"
-            sx={{
-              backgroundColor: theme.palette.primary.main,
-              color: theme.palette.black.main,
-              '&:hover': {
-                backgroundColor: theme.palette.primary.dark,
-              },
-            }}
-          >
-            Login
-          </Button>
         </Stack>
+        <Button
+          variant="roundedOutlined"
+          type="submit"
+          sx={{
+            width: '100%',
+            color: 'primary.main',
+            borderColor: 'primary.main',
+          }}
+        >
+          Login
+        </Button>
       </form>
     </Box>
   );
