@@ -110,7 +110,7 @@ const theme = createTheme({
             padding: '0px',
             borderRadius: '7px',
             '& input': {
-              padding: '10px 13px',
+              padding: '12px 16px',
             },
             '& fieldset': {
               borderColor: palette.white,
@@ -126,10 +126,28 @@ const theme = createTheme({
       },
     },
     //MuiDisabled outline white만들기
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          '&.Mui-disabled': {
+            '& input': {
+              color: palette.white,
+            },
+            '& fieldset': {
+              borderColor: palette.white,
+            },
+          },
+        },
+      },
+    },
     MuiInputBase: {
       styleOverrides: {
         root: {
           color: palette.white,
+          '&.Mui-disabled .MuiInputBase-input': {
+            opacity: 1,
+            WebkitTextFillColor: palette.grey[200],
+          },
         },
       },
     },
