@@ -10,6 +10,7 @@ interface CustomTabsProps {
   }[];
   refs: Record<ContentType, React.RefObject<HTMLButtonElement>>;
   selectedValue: ContentType;
+  gap?: string;
   onChange: (value: ContentType) => void;
 }
 
@@ -17,6 +18,7 @@ const CustomTabs: React.FC<CustomTabsProps> = ({
   buttons,
   refs,
   selectedValue,
+  gap = '50px',
   onChange,
 }) => {
   const [underlineStyle, setUnderlineStyle] = useState({});
@@ -63,7 +65,7 @@ const CustomTabs: React.FC<CustomTabsProps> = ({
       <ButtonGroup
         color="primary"
         aria-label="Content Type"
-        sx={{ gap: '70px', border: 'none' }}
+        sx={{ gap: gap, border: 'none' }}
       >
         {buttons.map((button) => (
           <Button
