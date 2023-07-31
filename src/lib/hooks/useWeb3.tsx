@@ -1,11 +1,13 @@
 import { MetaMaskInpageProvider } from '@metamask/providers';
 import Web3 from 'web3';
-import { useContext, useEffect, useState } from 'react';
-import { UserContext } from '@/lib/contexts/UserContextProvider';
+import { useEffect, useState } from 'react';
+import { ADDR_TOKEN_KEY, BALANCE_TOKEN_KEY } from '@/constants/token';
+import { useLocalStorage } from './useLocalStorage';
 
 export const useWeb3 = () => {
-  const { userAddr, setUserAddr, userBalance, setUserBalance } =
-    useContext(UserContext);
+  const [userAddr, setUserAddr] = useLocalStorage<string>(ADDR_TOKEN_KEY, '');
+  const [_, setUserBalance] = useLocalStorage<string>(BALANCE_TOKEN_KEY, '');
+
   const [web3, setWeb3] = useState<Web3 | undefined>(undefined);
   const [transactions, setTractions] = useState<any[]>([]);
 
@@ -51,7 +53,8 @@ export const useWeb3 = () => {
 
   const getBalance = async (_web3: Web3, _userAddr: string) => {
     const _balance = await _web3.eth.getBalance(_userAddr);
-    setUserBalance(Number(_balance) / 10 ** 18);
+
+    setUserBalance(String(Number(_balance) / 10 ** 18));
   };
 
   const fireTransaction = async (to: string, amount: string) => {
@@ -66,7 +69,7 @@ export const useWeb3 = () => {
         await web3?.eth.sendTransaction(tx);
 
         const _balance = await web3?.eth.getBalance(userAddr);
-        setUserBalance(Number(_balance) / 10 ** 18);
+        setUserBalance(String(Number(_balance) / 10 ** 18));
       } catch (error) {
         console.error(error);
       }
@@ -124,16 +127,14 @@ export const useWeb3 = () => {
         });
       }
     })();
-  }, []);
+  }, [getBalance, setUserAddr]);
 
   useEffect(() => {
     getTransactionsByAccount();
-  }, [web3]);
+  }, [getTransactionsByAccount, web3]);
 
   return {
-    userAddr,
     web3,
-    userBalance,
     transactions,
     fireTransaction,
     getAccount,

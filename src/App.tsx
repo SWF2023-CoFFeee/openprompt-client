@@ -1,4 +1,3 @@
-import { CssBaseline } from '@mui/material';
 import { Global, css } from '@emotion/react';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClientProvider } from '@tanstack/react-query';
@@ -7,7 +6,6 @@ import queryClient from '@/lib/queries/queryClient';
 import DynamicRoutes from './DynamicRoutes';
 import theme from './styles/mui/theme';
 import './App.css';
-import UserContextProvider from './lib/contexts/UserContextProvider';
 
 const globalStyles = css`
   * {
@@ -36,9 +34,7 @@ const App = () => {
       <Global styles={globalStyles} />
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
-          <UserContextProvider>
-            <DynamicRoutes />
-          </UserContextProvider>
+          <DynamicRoutes />
         </QueryClientProvider>
       </BrowserRouter>
     </ThemeProvider>

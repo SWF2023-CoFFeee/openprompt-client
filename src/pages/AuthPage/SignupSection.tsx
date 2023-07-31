@@ -30,13 +30,12 @@ const SignupSection = ({ onSwitchAuthStep }: ISignupSectionProps) => {
     setIsMaskingPassword(!isMaskingPassword);
   };
 
-  const [signupFormData, onChangeSignupFormData, onInitSignupFormData] =
-    useInputs<{
-      id: string;
-      username: string;
-      password: string;
-      confirmPassword: string;
-    }>({ id: '', username: '', password: '', confirmPassword: '' });
+  const [signupFormData, onChangeSignupFormData] = useInputs<{
+    id: string;
+    username: string;
+    password: string;
+    confirmPassword: string;
+  }>({ id: '', username: '', password: '', confirmPassword: '' });
 
   const onSubmitSignupFormData = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

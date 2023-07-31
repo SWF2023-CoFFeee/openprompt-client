@@ -15,10 +15,8 @@ import {
   VisibilityOff,
   Visibility,
 } from '@mui/icons-material';
-import { useContext } from 'react';
 import { useState } from 'react';
 import { useInputs } from '@/lib/hooks/useInputs';
-import { UserContext } from '@/lib/contexts/UserContextProvider';
 import theme from '@/styles/mui/theme';
 import palette from '@/styles/mui/palette';
 import { TAuthStep } from '.';
@@ -32,13 +30,11 @@ const SigninSection = ({ onSwitchAuthStep }: ISigninSectionProps) => {
   const onToggleIsMaskingPassword = () => {
     setIsMaskingPassword(!isMaskingPassword);
   };
-  const { isLogin, setIsLogin } = useContext(UserContext);
 
-  const [signinFormData, onChangeSigninFormData, onInitSigninFormData] =
-    useInputs<{
-      id: string;
-      password: string;
-    }>({ id: '', password: '' });
+  const [signinFormData, onChangeSigninFormData] = useInputs<{
+    id: string;
+    password: string;
+  }>({ id: '', password: '' });
 
   const onSubmitSigninFormData = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

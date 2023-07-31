@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Typography } from '@mui/material';
 import React from 'react';
 import Template from '@/components/common/CustomUI/template';
-import { useInputs } from '@/lib/hooks/useInputs';
 import SignupSection from './SignupSection';
 import SigninSection from './SigninSection';
 import ConnectAddrSection from './ConnectAddrSection';

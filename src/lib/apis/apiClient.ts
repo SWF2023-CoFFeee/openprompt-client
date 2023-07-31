@@ -4,7 +4,6 @@ import axios, {
   AxiosError,
 } from 'axios';
 import { ACCESS_TOKEN_KEY } from '@/constants/token';
-import token from '@/lib/token';
 import { SERVER_URL } from '@/constants/config';
 
 const host = SERVER_URL;
@@ -23,7 +22,7 @@ const logOnDev = (
 };
 
 apiClient.interceptors.request.use((request) => {
-  const jwtToken: string | null = token.getToken(ACCESS_TOKEN_KEY);
+  const jwtToken: string | null = window.localStorage.getItem(ACCESS_TOKEN_KEY);
   const { method, url } = request;
 
   if (jwtToken) {
