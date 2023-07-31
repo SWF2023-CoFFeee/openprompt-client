@@ -7,6 +7,7 @@ import queryClient from '@/lib/queries/queryClient';
 import DynamicRoutes from './DynamicRoutes';
 import theme from './styles/mui/theme';
 import './App.css';
+import UserContextProvider from './lib/contexts/UserContextProvider';
 
 const globalStyles = css`
   * {
@@ -35,7 +36,9 @@ const App = () => {
       <Global styles={globalStyles} />
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
-          <DynamicRoutes />
+          <UserContextProvider>
+            <DynamicRoutes />
+          </UserContextProvider>
         </QueryClientProvider>
       </BrowserRouter>
     </ThemeProvider>

@@ -1,11 +1,12 @@
 import { MetaMaskInpageProvider } from '@metamask/providers';
 import Web3 from 'web3';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { UserContext } from '@/lib/contexts/UserContextProvider';
 
-export const useWeb3 = (ethereum: MetaMaskInpageProvider) => {
-  const [account, setAccount] = useState<string>('');
+export const useWeb3 = () => {
+  const { userAddr, setUserAddr, userBalance, setUserBalance } =
+    useContext(UserContext);
   const [web3, setWeb3] = useState<Web3 | undefined>(undefined);
-  const [balance, setBalance] = useState<number>(0);
   const [transactions, setTractions] = useState<any[]>([]);
 
   const getCurChainId = async () => {
@@ -40,33 +41,35 @@ export const useWeb3 = (ethereum: MetaMaskInpageProvider) => {
   const getAccount = async () => {
     const eth = window.ethereum as MetaMaskInpageProvider;
 
-    const [_account] = (await eth.request({
+    const [_userAddr] = (await eth.request({
       method: 'eth_requestAccounts',
     })) as string[];
-    setAccount(_account);
+    setUserAddr(_userAddr);
 
-    return _account;
+    return _userAddr;
   };
 
-  const getBalance = async (_web3: Web3, _account: string) => {
-    const _balance = await _web3.eth.getBalance(_account);
-    setBalance(Number(_balance) / 10 ** 18);
+  const getBalance = async (_web3: Web3, _userAddr: string) => {
+    const _balance = await _web3.eth.getBalance(_userAddr);
+    setUserBalance(Number(_balance) / 10 ** 18);
   };
 
   const fireTransaction = async (to: string, amount: string) => {
-    try {
-      const tx = {
-        from: account,
-        to: to,
-        value: web3?.utils.toWei(amount, 'ether'),
-      };
+    if (userAddr) {
+      try {
+        const tx = {
+          from: userAddr,
+          to: to,
+          value: web3?.utils.toWei(amount, 'ether'),
+        };
 
-      await web3?.eth.sendTransaction(tx);
+        await web3?.eth.sendTransaction(tx);
 
-      const _balance = await web3?.eth.getBalance(account);
-      setBalance(Number(_balance) / 10 ** 18);
-    } catch (error) {
-      console.error(error);
+        const _balance = await web3?.eth.getBalance(userAddr);
+        setUserBalance(Number(_balance) / 10 ** 18);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -89,7 +92,7 @@ export const useWeb3 = (ethereum: MetaMaskInpageProvider) => {
 
       const _transactionsByAccount = _transactions.filter((transaction) => {
         if (typeof transaction !== 'string') {
-          return transaction.from === account || transaction.to === account;
+          return transaction.from === userAddr || transaction.to === userAddr;
         }
       });
 
@@ -115,7 +118,7 @@ export const useWeb3 = (ethereum: MetaMaskInpageProvider) => {
             Array.isArray(accounts) &&
             accounts.every((item) => typeof item === 'string')
           ) {
-            setAccount(accounts[0]);
+            setUserAddr(accounts[0]);
             await getBalance(_web3, accounts[0]);
           }
         });
@@ -125,12 +128,12 @@ export const useWeb3 = (ethereum: MetaMaskInpageProvider) => {
 
   useEffect(() => {
     getTransactionsByAccount();
-  }, [web3, account]);
+  }, [web3]);
 
   return {
-    account,
+    userAddr,
     web3,
-    balance,
+    userBalance,
     transactions,
     fireTransaction,
     getAccount,
