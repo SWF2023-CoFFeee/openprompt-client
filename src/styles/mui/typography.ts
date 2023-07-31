@@ -1,14 +1,16 @@
 const typography = {
-  fontFamily: 'Noto Sans KR, sans-serif',
+  fontFamily: 'Noto Sans',
   fontSize: 12,
   h1: {
+    fontFamily: 'Oswald',
     fontWeight: 'bold',
-    fontSize: '72px',
-    lineHeight: 'auto',
+    fontSize: '130px',
+    letterSpacing: '-4%',
+    lineHeight: '134px',
   },
 
   h2: {
-    fontWeight: 'bold',
+    fontWeight: 'Noto Sans',
     fontSize: '40px',
     lineHeight: 'auto',
   },
@@ -19,17 +21,11 @@ const typography = {
     lineHeight: 'auto',
   },
 
-  subtitle2: {
-    fontWeight: 'bold',
-    fontSize: '16px',
-    lineHeight: 'auto',
-  },
-
   // 대부분의 MUI요소에 DEFAULT로 사용
   body1: {
     fontWeight: 'normal',
-    fontSize: '14px',
-    lineHeight: '26px',
+    fontSize: '16px',
+    lineHeight: 'auto',
   },
 
   body2: {
