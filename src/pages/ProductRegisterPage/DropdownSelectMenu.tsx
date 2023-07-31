@@ -67,6 +67,10 @@ const customStyles: {
     paddingLeft: '15%',
     paddingTop: '10px',
     paddingBottom: '10px',
+    // 선택된 항목에 대한 폰트 색상 변경
+    '&.Mui-selected': {
+      color: 'white',
+    },
   },
   borderBottom: {
     position: 'absolute',

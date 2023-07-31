@@ -146,7 +146,7 @@ const theme = createTheme({
           color: palette.white,
           '&.Mui-disabled .MuiInputBase-input': {
             opacity: 1,
-            WebkitTextFillColor: palette.grey[200],
+            WebkitTextFillColor: palette.grey[400],
           },
         },
       },
