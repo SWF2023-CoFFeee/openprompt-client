@@ -10,7 +10,6 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Template from '@/components/common/CustomUI/template';
-import { CustomBackButton } from '@/components/common/CustomUI/button/CustomBackButton';
 import palette from '@/styles/mui/palette';
 
 const StableDiffusionICon = () => {

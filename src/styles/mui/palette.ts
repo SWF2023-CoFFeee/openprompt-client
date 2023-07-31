@@ -8,6 +8,9 @@ const palette = {
     main: '#050C1A',
     contrastText: '#fff',
   },
+  action: {
+    disabled: '#FFFFFF',
+  },
   grey: {
     600: '#141E31',
     500: '#414958',
