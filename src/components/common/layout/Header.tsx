@@ -4,28 +4,31 @@ import {
   Box,
   Toolbar,
   Typography,
-  Menu,
   Container,
+  Stack,
+  IconButton,
   Button,
-  Tooltip,
-  MenuItem,
 } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
+import { Logout } from '@mui/icons-material';
 import RouterMeta from '@/lib/RouterMeta';
 import palette from '@/styles/mui/palette';
+import { ADDR_TOKEN_KEY } from '@/constants/token';
+import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
 
 const ResponsiveAppBar = () => {
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null,
-  );
+  const [userAddr, _setUserAddr_, _deleteUserAddr_, clearStorage] =
+    useLocalStorage(ADDR_TOKEN_KEY, '');
 
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
+  const navigate = useNavigate();
+
+  const onClickLogin = () => {
+    navigate(RouterMeta.AuthPage.path);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const onLogout = () => {
+    clearStorage();
   };
 
   return (
@@ -47,31 +50,43 @@ const ResponsiveAppBar = () => {
               <img src={'/imgs/logo/coffeee-logo-white.png'} alt="home" />
             </NavLink>
           </Box>
-          <Box
-            sx={{ display: { xs: 'none', md: 'flex' }, marginRight: '100px' }}
+          <Stack
+            direction="row"
+            gap="1em"
+            alignItems="center"
+            sx={{ marginRight: '100px' }}
           >
             {Object.keys(RouterMeta).map((router) => {
               if (!RouterMeta[router].isShow) {
                 return;
               }
               return (
-                <Button
-                  disableRipple
+                <NavLink
                   key={router}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
+                  to={RouterMeta[router].path}
+                  style={({ isActive }) => ({
+                    color: isActive ? 'white' : 'rgba(255,255,255,0.5)',
+                  })}
                 >
-                  <NavLink
-                    to={RouterMeta[router].path}
-                    style={({ isActive }) => ({
-                      color: isActive ? 'white' : 'rgba(255,255,255,0.5)',
-                    })}
-                  >
-                    <Typography>{RouterMeta[router].name}</Typography>
-                  </NavLink>
-                </Button>
+                  <Typography>{RouterMeta[router].name}</Typography>
+                </NavLink>
               );
             })}
-          </Box>
+            {userAddr ? (
+              <IconButton style={{ color: palette.white }} onClick={onLogout}>
+                <Logout />
+              </IconButton>
+            ) : (
+              <Button
+                variant="roundedOutlined"
+                size="small"
+                type="button"
+                onClick={onClickLogin}
+              >
+                Login
+              </Button>
+            )}
+          </Stack>
         </Toolbar>
       </Container>
     </AppBar>

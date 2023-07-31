@@ -17,7 +17,7 @@ const RouterMeta: RouterMetaType = {
   AuthPage: {
     name: 'Auth',
     path: '/auth',
-    isShow: true,
+    isShow: false,
   },
   MarketPage: {
     name: 'Market',

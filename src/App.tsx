@@ -1,4 +1,3 @@
-import { CssBaseline } from '@mui/material';
 import { Global, css } from '@emotion/react';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClientProvider } from '@tanstack/react-query';
