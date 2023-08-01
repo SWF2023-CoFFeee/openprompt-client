@@ -1,14 +1,13 @@
 import Lottie from 'react-lottie';
-import TransactionLoading from '@/components/common/CustomUI/loading/TransactionLoading';
 import Template from '@/components/common/CustomUI/template';
+
 import successLottie from './openprompt_success.json';
 
 const SuccessPage = () => {
   return (
-    // <Template>
-    //   <LottieComponent />
-    // </Template>
-    <TransactionLoading variant="ticket_buy" />
+    <Template>
+      <LottieComponent />
+    </Template>
   );
 };
 
