@@ -7,7 +7,6 @@ import {
   Container,
   Typography,
 } from '@mui/material';
-import { useParams } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useParams } from 'react-router-dom';
