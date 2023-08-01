@@ -12,7 +12,7 @@ const RouterMeta: RouterMetaType = {
   HomePage: {
     name: 'Home',
     path: '/',
-    isShow: true,
+    isShow: false,
   },
   AuthPage: {
     name: 'Auth',
@@ -27,21 +27,21 @@ const RouterMeta: RouterMetaType = {
   ProductDetailPage: {
     name: 'PDP',
     path: '/product/:productid',
-    isShow: true,
+    isShow: false,
   },
   CopyrightRegisterPage: {
-    name: 'CopyrightRegister',
+    name: 'Register Copyright',
     path: '/register/copyright',
     isShow: true,
   },
   ProductRegisterPage: {
     name: 'ProductRegister',
     path: '/register/product',
-    isShow: true,
+    isShow: false,
   },
   SuccessPage: {
     name: 'Success',
-    path: '/success',
+    path: '/success/:successtype',
     isShow: true,
   },
   MyPage: {
@@ -52,7 +52,7 @@ const RouterMeta: RouterMetaType = {
   DesignSystemPage: {
     name: 'Design',
     path: '/design-system',
-    isShow: true,
+    isShow: false,
   },
 };
 

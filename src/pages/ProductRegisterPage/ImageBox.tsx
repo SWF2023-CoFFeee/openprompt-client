@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import palette from '@/styles/mui/palette';
-
-const ImageBox: React.FC = () => {
+interface IImageBoxProps {
+  name: string;
+  onChange: any;
+}
+const ImageBox = ({ name, onChange }: IImageBoxProps) => {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,9 +78,21 @@ const ImageBox: React.FC = () => {
           </Typography>
           <input
             type="file"
-            style={{ display: 'none' }}
-            onChange={handleFileChange}
             accept="image/*"
+            style={{ display: 'none' }}
+            onChange={(e) => {
+              handleFileChange(e);
+
+              const file = e.target.files?.[0];
+              if (file) {
+                onChange({
+                  target: {
+                    name: name,
+                    value: file,
+                  },
+                });
+              }
+            }}
           />
         </Box>
       )}

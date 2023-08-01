@@ -22,10 +22,22 @@ export const useInputs = <
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value,
-    });
+    const { name, value } = event.target;
+
+    if ((event.target as HTMLInputElement).files) {
+      const files = (event.target as HTMLInputElement).files;
+      if (files && files.length > 0) {
+        setValues({
+          ...values,
+          [name]: files[0],
+        });
+      }
+    } else {
+      setValues({
+        ...values,
+        [name]: value,
+      });
+    }
   };
 
   const onInit = () => {

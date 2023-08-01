@@ -28,7 +28,7 @@ const ConnectAddrSection = ({ onSwitchAuthStep }: IConnectAddrSectionProps) => {
     return (
       <Stack sx={{ width: '429px' }}>
         <Typography variant="body2" textAlign="center" sx={{ mb: '182px' }}>
-          If you already have an account register ?
+          Please connect your wallet.
         </Typography>
 
         <Button

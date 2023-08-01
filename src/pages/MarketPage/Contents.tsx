@@ -6,15 +6,16 @@ import {
   Container,
   Grid,
   Typography,
-  IconButton,
   Avatar,
   CardActions,
   Button,
 } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useNavigate } from 'react-router-dom';
 import palette from '@/styles/mui/palette';
 import CustomChip from './CustomChip';
+
 interface IProduct {
   id: string;
   address: string;
@@ -112,14 +113,18 @@ function stringToColor(string: string) {
 }
 
 const CardExample: React.FC<ICardExampleProps> = ({ product }) => {
+  const navigate = useNavigate();
   const [liked, setLiked] = useState(false);
   const handleLikeClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     setLiked(!liked);
   };
 
-  const capturingClick = (e: React.MouseEvent) => {
+  const onClickProduct = (e: React.MouseEvent) => {
     e.stopPropagation();
+
+    // TODO 아래 경로를 api상 프로덕트아이디로 바꿔주세요
+    navigate(`/product/${product.address}`);
   };
 
   return (
@@ -130,6 +135,7 @@ const CardExample: React.FC<ICardExampleProps> = ({ product }) => {
         maxHeight: '300px',
         borderRadius: '0.8rem',
       }}
+      onClick={() => console.log('111')}
     >
       <Box
         sx={{
@@ -151,13 +157,13 @@ const CardExample: React.FC<ICardExampleProps> = ({ product }) => {
               display: 'flex',
               width: '300px',
               height: '100%',
-              background: `linear-gradient(-180deg, rgba(0, 0, 0, 1) 0%, rgba(128, 128, 128, 0) 30%), linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(128, 128, 128, 0) 30%)`,
+              background: `linear-gradient(-180deg, rgba(0, 0, 0, 0.48) 0%, rgba(128, 128, 128, 0) 30%), linear-gradient(0deg, rgba(0, 0, 0, 0.48) 0%, rgba(128, 128, 128, 0) 30%)`,
               backgroundRepeat: 'no-repeat, no-repeat',
               backgroundPosition: 'top center, bottom center',
             }}
           >
             <Button
-              onClick={(e) => capturingClick(e)}
+              onClick={(e) => onClickProduct(e)}
               sx={{
                 display: 'flex',
                 width: '100%',
@@ -240,19 +246,23 @@ const CardExample: React.FC<ICardExampleProps> = ({ product }) => {
                         display: 'flex',
                         flexDirection: 'row',
                         justifyContent: 'flex-end',
+                        gap: '4px',
                       }}
                     >
-                      <Typography variant="body2">{product.like}</Typography>
-                      <IconButton
+                      <Typography variant="body2" sx={{ height: '32px' }}>
+                        {product.like}
+                      </Typography>
+                      <Box
                         sx={{
                           display: 'flex',
                           justifyContent: 'flex-end',
+                          alignItems: 'center',
                           color: 'white',
                         }}
                         onClick={(e) => handleLikeClick(e)}
                       >
                         {liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-                      </IconButton>
+                      </Box>
                     </Box>
                   </Box>
                 </CardContent>

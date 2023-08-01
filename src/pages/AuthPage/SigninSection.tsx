@@ -17,8 +17,10 @@ import {
 } from '@mui/icons-material';
 import { useState } from 'react';
 import { useInputs } from '@/lib/hooks/useInputs';
-import theme from '@/styles/mui/theme';
 import palette from '@/styles/mui/palette';
+import { postSigninData } from '@/lib/apis/user';
+import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
+import { ACCESS_TOKEN_KEY, USERINFO_KEY } from '@/constants/token';
 import { TAuthStep } from '.';
 
 export interface ISigninSectionProps {
@@ -26,19 +28,31 @@ export interface ISigninSectionProps {
 }
 
 const SigninSection = ({ onSwitchAuthStep }: ISigninSectionProps) => {
+  const [_token, setToken] = useLocalStorage(ACCESS_TOKEN_KEY, '');
+  const [_userinfo, setUserInfo] = useLocalStorage(USERINFO_KEY, '');
+
   const [isMaskingPassword, setIsMaskingPassword] = useState(false);
   const onToggleIsMaskingPassword = () => {
     setIsMaskingPassword(!isMaskingPassword);
   };
 
   const [signinFormData, onChangeSigninFormData] = useInputs<{
-    id: string;
+    username: string;
     password: string;
-  }>({ id: '', password: '' });
+  }>({ username: '', password: '' });
 
   const onSubmitSigninFormData = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSwitchAuthStep('Connect Wallet');
+    postSigninData(signinFormData)
+      .then((res) => {
+        const { token, username } = res.data;
+
+        setToken(token);
+        setUserInfo(username);
+      })
+      .then((_) => {
+        onSwitchAuthStep('Connect Wallet');
+      });
     return null;
   };
 
@@ -70,8 +84,8 @@ const SigninSection = ({ onSwitchAuthStep }: ISigninSectionProps) => {
             placeholder="Enter your Username"
             type="text"
             variant="standard"
-            name="id"
-            value={signinFormData.id}
+            name="username"
+            value={signinFormData.username}
             onChange={onChangeSigninFormData}
             InputProps={{
               startAdornment: (
@@ -97,7 +111,10 @@ const SigninSection = ({ onSwitchAuthStep }: ISigninSectionProps) => {
               '& .MuiInput-underline.Mui-focused:after': {
                 borderBottom: `2px solid ${palette.primary.main}`,
               },
-              '& .MuiInput-underline:hover:before': {
+              '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+                borderBottom: `2px solid ${palette.white}`,
+              },
+              '& .MuiInput-underline.Mui-hover:not(.Mui-disabled):before': {
                 borderBottom: `2px solid ${palette.white}`,
               },
             }}
@@ -145,7 +162,10 @@ const SigninSection = ({ onSwitchAuthStep }: ISigninSectionProps) => {
               '& .MuiInput-underline.Mui-focused:after': {
                 borderBottom: `2px solid ${palette.primary.main}`,
               },
-              '& .MuiInput-underline:hover:before': {
+              '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+                borderBottom: `2px solid ${palette.white}`,
+              },
+              '& .MuiInput-underline.Mui-hover:not(.Mui-disabled):before': {
                 borderBottom: `2px solid ${palette.white}`,
               },
             }}

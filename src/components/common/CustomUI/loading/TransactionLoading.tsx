@@ -20,10 +20,10 @@ const LottieComponent = () => {
   );
 };
 
-type Variant = 'copyright_regist' | 'copyright_buy' | 'ticket_buy';
+type TransActionVariant = 'copyright_regist' | 'copyright_buy' | 'ticket_buy';
 
 interface CustomTransactionLoadingProps {
-  variant: Variant;
+  variant: TransActionVariant;
 }
 
 const CustomTransactionLoading: React.FC<CustomTransactionLoadingProps> = ({

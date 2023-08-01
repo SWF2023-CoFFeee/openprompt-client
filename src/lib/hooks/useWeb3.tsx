@@ -134,7 +134,7 @@ export const useWeb3 = () => {
 
   useEffect(() => {
     getTransactionsByAccount();
-  }, [getTransactionsByAccount, web3]);
+  }, []);
 
   return {
     userAddr,

@@ -6,6 +6,8 @@ import queryClient from '@/lib/queries/queryClient';
 import DynamicRoutes from './DynamicRoutes';
 import theme from './styles/mui/theme';
 import './App.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const globalStyles = css`
   * {
@@ -23,7 +25,13 @@ const globalStyles = css`
   @font-face {
     font-family: 'Oswald';
     src: url('/fonts/Oswald/Oswald-Medium.ttf') format('truetype');
-    font-weight: 500; // medium의 대표적인 값은 500입니다.
+    font-weight: medium; // medium의 대표적인 값은 500입니다.
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Oswald';
+    src: url('/fonts/Oswald/Oswald-Regular.ttf') format('truetype');
+    font-weight: regular;
     font-style: normal;
   }
 `;
