@@ -1,7 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { Typography, Box, Container, Button, Checkbox } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import Template from '@/components/common/CustomUI/template';
 import { ContentType } from '@/components/common/CustomUI/tabs/CustomTabs';
+import RouterMeta from '@/lib/RouterMeta';
 import {
   mockRightsOfUsageProductData,
   mockCopyrightProductData,
@@ -17,6 +19,7 @@ type CheckedState = {
 };
 
 const MarketPage = () => {
+  const navigate = useNavigate();
   const [content, setContent] = useState<ContentType>('License');
   const [showContent, setShowContent] = useState(true);
   const [isChecked, setIsChecked] = useState<CheckedState>({
@@ -81,7 +84,7 @@ const MarketPage = () => {
         <Button
           sx={{ color: '#AEFF29' }}
           onClick={() => {
-            console.log('buttonClicked');
+            navigate(RouterMeta.ProductRegisterPage.path);
           }}
           variant="roundedOutlined"
         >

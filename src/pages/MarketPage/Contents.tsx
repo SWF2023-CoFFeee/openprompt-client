@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useNavigate } from 'react-router-dom';
 import palette from '@/styles/mui/palette';
 import CustomChip from './CustomChip';
 
@@ -112,14 +113,18 @@ function stringToColor(string: string) {
 }
 
 const CardExample: React.FC<ICardExampleProps> = ({ product }) => {
+  const navigate = useNavigate();
   const [liked, setLiked] = useState(false);
   const handleLikeClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     setLiked(!liked);
   };
 
-  const capturingClick = (e: React.MouseEvent) => {
+  const onClickProduct = (e: React.MouseEvent) => {
     e.stopPropagation();
+
+    // TODO 아래 경로를 api상 프로덕트아이디로 바꿔주세요
+    navigate(`/product/${product.address}`);
   };
 
   return (
@@ -130,6 +135,7 @@ const CardExample: React.FC<ICardExampleProps> = ({ product }) => {
         maxHeight: '300px',
         borderRadius: '0.8rem',
       }}
+      onClick={() => console.log('111')}
     >
       <Box
         sx={{
@@ -157,7 +163,7 @@ const CardExample: React.FC<ICardExampleProps> = ({ product }) => {
             }}
           >
             <Button
-              onClick={(e) => capturingClick(e)}
+              onClick={(e) => onClickProduct(e)}
               sx={{
                 display: 'flex',
                 width: '100%',
