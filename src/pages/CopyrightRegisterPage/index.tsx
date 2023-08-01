@@ -11,18 +11,19 @@ import {
   FormControl,
   Button,
   Icon,
-  Tooltip,
 } from '@mui/material';
 import { WarningAmber } from '@mui/icons-material';
+import { useEffect } from 'react';
 import Template from '@/components/common/CustomUI/template';
 import palette from '@/styles/mui/palette';
 import theme from '@/styles/mui/theme';
 import { useWeb3 } from '@/lib/hooks/useWeb3';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
-import { ADDR_TOKEN_KEY } from '@/constants/token';
+import { ADDR_TOKEN_KEY, ACCESS_TOKEN_KEY } from '@/constants/token';
 import { CoffeeeAbi, CONTRACT_ADDR } from '@/lib/abis/OpenPromptABI';
 import CustomNoMaxWidthTooltip from '@/components/common/CustomUI/card/CustomNoMaxWidthTooltip';
 import { useInputs } from '@/lib/hooks/useInputs';
+import { getList, postRegister } from '@/lib/apis/copyright';
 
 const CopyrightRegisterPage = () => {
   const { web3 } = useWeb3();
@@ -30,41 +31,52 @@ const CopyrightRegisterPage = () => {
   const [copyrightForRegisterFormData, onChangeCopyrightForRegisterFormData] =
     useInputs<{
       prompt: string;
-      AI_model: string;
-      currentAddress: string;
-      copyright_name: string;
+      ai_type: string;
+      copyright_title: string;
     }>({
       prompt: '',
-      AI_model: '',
-      currentAddress: userAddr,
-      copyright_name: '',
+      ai_type: '',
+      copyright_title: '',
     });
 
   const onSubmitCopyrightForRegisterFormData = (
     e: React.FormEvent<HTMLFormElement>,
   ) => {
     e.preventDefault();
-    console.log(copyrightForRegisterFormData);
+    postRegister(copyrightForRegisterFormData).then((res) => {
+      const { ipfs_uri, copyright_id } = res.data;
+      onMint(ipfs_uri, copyright_id);
+    });
   };
+
+  useEffect(() => {
+    getList().then((res) => {
+      console.log(res);
+    });
+  }, []);
 
   // ---------------------NFT----------------------
   if (!web3 || !userAddr) return null;
 
-  const contract = new web3.eth.Contract(CoffeeeAbi, CONTRACT_ADDR);
-
-  const data1 = (contract.methods['mintNFT'] as any)(
-    'ipfs://QmVbwfFH65T4wBptztFDbeikwAfeBDSyq7y25TH13KJcVn',
-    '333333333333333',
-  ).encodeABI();
-  const mintParam = {
-    from: userAddr,
-    to: CONTRACT_ADDR,
-    gasLimit: web3.utils.toHex('50000000'),
-    gasPrice: web3.utils.toHex(web3.utils.toWei('0.0000000000000001', 'ether')),
-    data: data1,
-  };
-  const onMint = async () => {
+  const onMint = async (ipfsURI: string, cId: string) => {
     try {
+      const contract = new web3.eth.Contract(CoffeeeAbi, CONTRACT_ADDR);
+
+      const encodedMintNFTFunction = (contract.methods['mintNFT'] as any)(
+        ipfsURI,
+        cId,
+      ).encodeABI();
+
+      const mintParam = {
+        from: userAddr,
+        to: CONTRACT_ADDR,
+        gasLimit: web3.utils.toHex('50000000'),
+        gasPrice: web3.utils.toHex(
+          web3.utils.toWei('0.0000000000000001', 'ether'),
+        ),
+        data: encodedMintNFTFunction,
+      };
+
       await window.ethereum
         ?.request({
           method: 'eth_sendTransaction',
@@ -76,49 +88,49 @@ const CopyrightRegisterPage = () => {
     }
   };
 
-  const getNFTsByOwner = async (address: string) => {
-    const tokens = await (contract.methods.getNFTsByOwner as any)(
-      address,
-    ).call();
+  // const getNFTsByOwner = async (address: string) => {
+  //   const tokens = await (contract.methods.getNFTsByOwner as any)(
+  //     address,
+  //   ).call();
 
-    console.log(tokens);
-    return tokens;
-  };
+  //   console.log(tokens);
+  //   return tokens;
+  // };
 
-  const onGetNFT = async (userAddr: string) => {
-    try {
-      const tokenIds = await getNFTsByOwner(userAddr);
-      console.log('Received token IDs:', tokenIds);
+  // const onGetNFT = async (userAddr: string) => {
+  //   try {
+  //     const tokenIds = await getNFTsByOwner(userAddr);
+  //     console.log('Received token IDs:', tokenIds);
 
-      const uriPromises = tokenIds.map(async (tokenId: any) => {
-        const data = (contract.methods['getIpfsUri'] as any)(
-          tokenId,
-        ).encodeABI();
-        const getIpfsUriParam = {
-          from: userAddr,
-          to: CONTRACT_ADDR,
-          data: data,
-        };
+  //     const uriPromises = tokenIds.map(async (tokenId: any) => {
+  //       const data = (contract.methods['getIpfsUri'] as any)(
+  //         tokenId,
+  //       ).encodeABI();
+  //       const getIpfsUriParam = {
+  //         from: userAddr,
+  //         to: CONTRACT_ADDR,
+  //         data: data,
+  //       };
 
-        return window.ethereum?.request({
-          method: 'eth_call',
-          params: [getIpfsUriParam],
-        });
-      });
+  //       return window.ethereum?.request({
+  //         method: 'eth_call',
+  //         params: [getIpfsUriParam],
+  //       });
+  //     });
 
-      const uris = await Promise.all(uriPromises);
-      console.log('NFTs URIs:', uris);
+  //     const uris = await Promise.all(uriPromises);
+  //     console.log('NFTs URIs:', uris);
 
-      const urisDecoded = uris.map((uri) => {
-        const str = web3.utils.hexToUtf8(uri);
-        const match = str.match(/ipfs:\/\/\S+/);
-        return match ? match[0].replace(/\0+$/, '') : '';
-      });
-      console.log('Decoded URIs:', urisDecoded);
-    } catch (error) {
-      console.error('An error occurred while making the donation: ', error);
-    }
-  };
+  //     const urisDecoded = uris.map((uri) => {
+  //       const str = web3.utils.hexToUtf8(uri);
+  //       const match = str.match(/ipfs:\/\/\S+/);
+  //       return match ? match[0].replace(/\0+$/, '') : '';
+  //     });
+  //     console.log('Decoded URIs:', urisDecoded);
+  //   } catch (error) {
+  //     console.error('An error occurred while making the donation: ', error);
+  //   }
+  // };
   // -------------------------------------------
 
   return (
@@ -176,7 +188,6 @@ const CopyrightRegisterPage = () => {
                 variant="outlined"
                 disabled
                 value={userAddr}
-                onChange={onChangeCopyrightForRegisterFormData}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -206,8 +217,8 @@ const CopyrightRegisterPage = () => {
               <RadioGroup
                 row
                 aria-labelledby="demo-row-radio-buttons-group-label"
-                name="AI_model"
-                value={copyrightForRegisterFormData.AI_model}
+                name="ai_type"
+                value={copyrightForRegisterFormData.ai_type}
                 onChange={onChangeCopyrightForRegisterFormData}
               >
                 <FormControlLabel
@@ -273,8 +284,8 @@ const CopyrightRegisterPage = () => {
               <Typography variant="body5">Copyright Name</Typography>
               <TextField
                 variant="outlined"
-                name="copyright_name"
-                value={copyrightForRegisterFormData.copyright_name}
+                name="copyright_title"
+                value={copyrightForRegisterFormData.copyright_title}
                 onChange={onChangeCopyrightForRegisterFormData}
               />
             </Box>

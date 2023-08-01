@@ -54,6 +54,11 @@ const RouterMeta: RouterMetaType = {
     path: '/design-system',
     isShow: false,
   },
+  SimilarityFailurePage: {
+    name: 'SimilarityFailurePage',
+    path: '/sm',
+    isShow: true,
+  },
 };
 
 export default RouterMeta;

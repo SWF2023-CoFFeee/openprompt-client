@@ -23,6 +23,7 @@ const logOnDev = (
 
 apiClient.interceptors.request.use((request) => {
   const jwtToken: string | null = window.localStorage.getItem(ACCESS_TOKEN_KEY);
+  console.log(jwtToken);
   const { method, url } = request;
 
   if (jwtToken) {
