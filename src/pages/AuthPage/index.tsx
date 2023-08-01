@@ -31,7 +31,7 @@ const AuthPage = () => {
     [key in TAuthStep]: IAuthStepProperty;
   }>({
     'Sign up': {
-      isVisible: true,
+      isVisible: false,
       component: <SignupSection onSwitchAuthStep={onSwitchAuthStep} />,
     },
     'Sign in': {
@@ -39,7 +39,7 @@ const AuthPage = () => {
       component: <SigninSection onSwitchAuthStep={onSwitchAuthStep} />,
     },
     'Connect Wallet': {
-      isVisible: false,
+      isVisible: true,
       component: <ConnectAddrSection onSwitchAuthStep={onSwitchAuthStep} />,
     },
   });

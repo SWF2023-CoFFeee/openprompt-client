@@ -1,9 +1,19 @@
 import React from 'react';
 import Slider from 'react-slick';
-import { Typography, Box, Container, Button } from '@mui/material';
+import { Typography, Box, Container, Button, Stack, Grid } from '@mui/material';
 import palette from '@/styles/mui/palette';
 
 const HomePage = () => {
+  const colors = ['red', 'green', 'blue', 'orange'];
+
+  const boxes = [
+    { position: [0, 0], color: colors[0] },
+    { position: [0, 1], color: colors[1] },
+    { position: [1, 1], color: colors[2] },
+    { position: [2, 0], color: colors[3] },
+  ];
+
+  const colorIndex = 0;
   const settings = {
     dots: false,
     infinite: true,
@@ -203,6 +213,26 @@ const HomePage = () => {
             }}
           ></Box>
         </Box>
+
+        <Stack direction="row" gap="28px">
+          <Box
+            sx={{
+              width: '395px',
+              height: '380px',
+              borderRadius: '8px 40px',
+              background:
+                'linear-gradient(180deg, #FFF 0%, rgba(255, 255, 255, 0.00) 100%)',
+            }}
+          ></Box>
+          <Box
+            sx={{
+              width: '395px',
+              height: '380px',
+              borderRadius: '8px 40px',
+              border: '2px solid #AEFF29',
+            }}
+          ></Box>
+        </Stack>
       </Container>
     </Box>
   );

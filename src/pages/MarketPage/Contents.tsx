@@ -33,6 +33,7 @@ interface IProductListProps {
 
 interface ICardExampleProps {
   product: IProduct;
+  index: number;
 }
 
 const ContentCopyRight: React.FC<IProductListProps> = ({ products }) => {
@@ -48,9 +49,9 @@ const ContentCopyRight: React.FC<IProductListProps> = ({ products }) => {
       }}
     >
       <Grid container spacing={5}>
-        {products.map((product) => (
+        {products.map((product, index) => (
           <Grid item key={product.id} xs={12} sm={6} md={4}>
-            <CardExample product={product} />
+            <CardExample product={product} index={index} />
           </Grid>
         ))}
       </Grid>
@@ -71,9 +72,9 @@ const ContentTicket: React.FC<IProductListProps> = ({ products }) => {
       }}
     >
       <Grid container spacing={5}>
-        {products.map((product) => (
+        {products.map((product, index) => (
           <Grid item key={product.id} xs={12} sm={6} md={4}>
-            <CardExample product={product} />
+            <CardExample product={product} index={index} />
           </Grid>
         ))}
       </Grid>
@@ -112,7 +113,7 @@ function stringToColor(string: string) {
   return color;
 }
 
-const CardExample: React.FC<ICardExampleProps> = ({ product }) => {
+const CardExample: React.FC<ICardExampleProps> = ({ product, index }) => {
   const navigate = useNavigate();
   const [liked, setLiked] = useState(false);
   const handleLikeClick = (e: React.MouseEvent) => {
@@ -139,7 +140,7 @@ const CardExample: React.FC<ICardExampleProps> = ({ product }) => {
     >
       <Box
         sx={{
-          backgroundImage: `url(${product.thumbNail})`,
+          backgroundImage: `url(/imgs/${index + 1}.jpg)`,
           display: 'flex',
           width: '300px',
           height: '300px',

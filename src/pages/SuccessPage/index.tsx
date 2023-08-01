@@ -64,7 +64,11 @@ const LottieComponent: React.FC<any> = ({ variant, state }) => {
     <Box>
       <Lottie options={defaultOptions} height={240} width={240} />
       <Box sx={{ marginTop: '40px', width: '416px' }}>
-        <Typography variant="h3" sx={{ marginBottom: '80px' }}>
+        <Typography
+          variant="h3"
+          sx={{ marginBottom: '80px' }}
+          textAlign="center"
+        >
           {successType}
         </Typography>
         <Box

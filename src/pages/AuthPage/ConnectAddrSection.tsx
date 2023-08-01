@@ -15,6 +15,7 @@ const ConnectAddrSection = ({ onSwitchAuthStep }: IConnectAddrSectionProps) => {
   const navigate = useNavigate();
 
   const onConnect = async () => {
+    console.log(1);
     const _account = await getAccount();
     if (_account && web3) {
       await getBalance(web3, _account).then((_) => {

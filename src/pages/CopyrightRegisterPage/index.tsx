@@ -45,15 +45,18 @@ const CopyrightRegisterPage = () => {
     e: React.FormEvent<HTMLFormElement>,
   ) => {
     e.preventDefault();
-    postRegister(copyrightForRegisterFormData).then((res) => {
-      const { ipfs_uri, copyright_id } = res.data;
-      onMint(ipfs_uri, copyright_id);
-    });
+    onMint(
+      'ipfs://QmVbwfFH65T4wBptztFDbeikwAfeBDSyq7y25TH13KJcVn',
+      '111111111111',
+    );
+    // postRegister(copyrightForRegisterFormData).then((res) => {
+    //   const { ipfs_uri, copyright_id } = res.data;
+    //   onMint(
+    //     'ipfs://QmVbwfFH65T4wBptztFDbeikwAfeBDSyq7y25TH13KJcVn',
+    //     'QmVbwfFH65T4wBptztFDbeikwAfeBDSyq7y25TH13KJcVn',
+    //   );
+    // });
   };
-
-  useEffect(() => {
-    getList().then((res) => console.log(res));
-  }, []);
 
   // ---------------------NFT----------------------
   if (!web3 || !userAddr) return null;

@@ -50,7 +50,11 @@ const LottieComponent: React.FC<any> = () => {
     <Box>
       <Lottie options={defaultOptions} height={240} width={240} />
       <Box sx={{ marginTop: '40px' }}>
-        <Typography variant="h3" sx={{ marginBottom: '40px' }}>
+        <Typography
+          variant="h3"
+          sx={{ marginBottom: '40px' }}
+          textAlign="center"
+        >
           Similar copyright exists!
         </Typography>
         <Box
