@@ -1,24 +1,15 @@
 import React, { useState, useRef } from 'react';
 import { Typography, Box, Container, Button, Checkbox } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import Template from '@/components/common/CustomUI/template';
 import { ContentType } from '@/components/common/CustomUI/tabs/CustomTabs';
+import RouterMeta from '@/lib/RouterMeta';
 import {
   mockRightsOfUsageProductData,
   mockCopyrightProductData,
 } from '../../mocks/mockData';
 import CustomTabs from '../../components/common/CustomUI/tabs/CustomTabs';
 import { ContentTicket, ContentCopyRight } from './Contents';
-
-type ButtonVariantType =
-  | 'text'
-  | 'outlined'
-  | 'contained'
-  | 'rounded'
-  | 'roundedOutlined'
-  | 'transparent'
-  | 'transparentLight';
-
-type ButtonColorType = 'default' | 'primary' | 'black';
 
 type CheckedState = {
   All: boolean;
@@ -28,8 +19,7 @@ type CheckedState = {
 };
 
 const MarketPage = () => {
-  const [buttonVariant, setButtonVariant] = useState<ButtonVariantType>('text');
-  const [buttonColor, setButtonColor] = useState<ButtonColorType>('default');
+  const navigate = useNavigate();
   const [content, setContent] = useState<ContentType>('License');
   const [showContent, setShowContent] = useState(true);
   const [isChecked, setIsChecked] = useState<CheckedState>({
@@ -39,16 +29,7 @@ const MarketPage = () => {
     StableDiffusion: true,
   });
 
-  const handleButtonClick = (
-    variant: ButtonVariantType,
-    color: ButtonColorType = 'default',
-  ) => {
-    setButtonVariant(variant);
-    setButtonColor(color);
-  };
-
   type ContentData = {
-    // eslint-disable-next-line no-unused-vars
     [key in ContentType]: {
       label: string;
       component: JSX.Element;
@@ -102,7 +83,9 @@ const MarketPage = () => {
       >
         <Button
           sx={{ color: '#AEFF29' }}
-          onClick={() => handleButtonClick('roundedOutlined')}
+          onClick={() => {
+            navigate(RouterMeta.ProductRegisterPage.path);
+          }}
           variant="roundedOutlined"
         >
           Register
@@ -128,7 +111,6 @@ const MarketPage = () => {
             justifyContent: 'center',
             alignItems: 'center',
             gap: '10px',
-            // Box의 너비 설정 (필요에 따라 조정)
           }}
         >
           <CustomTabs
@@ -143,9 +125,9 @@ const MarketPage = () => {
           />
           <Box
             sx={{
-              display: 'flex', // 요소들을 가로로 배치하기 위해 flex 사용
-              justifyContent: 'space-between', // 요소들을 양 끝으로 정렬
-              width: '100%', // Box의 너비 설정 (필요에 따라 조정)
+              display: 'flex',
+              justifyContent: 'space-between',
+              width: '100%',
             }}
           >
             <Typography
@@ -159,9 +141,9 @@ const MarketPage = () => {
             </Typography>
             <Box
               sx={{
-                display: 'flex', // 요소들을 가로로 배치하기 위해 flex 사용
-                justifyContent: 'space-between', // 요소들을 양 끝으로 정렬
-                width: '85%', // Box의 너비 설정 (필요에 따라 조정)
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: '85%',
               }}
             >
               <Box

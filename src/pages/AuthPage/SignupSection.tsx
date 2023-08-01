@@ -18,6 +18,7 @@ import { useState } from 'react';
 import { useInputs } from '@/lib/hooks/useInputs';
 import theme from '@/styles/mui/theme';
 import palette from '@/styles/mui/palette';
+import { postSignupData } from '@/lib/apis/user';
 import { TAuthStep } from '.';
 
 export interface ISignupSectionProps {
@@ -29,18 +30,17 @@ const SignupSection = ({ onSwitchAuthStep }: ISignupSectionProps) => {
   const onToggleIsMaskingPassword = () => {
     setIsMaskingPassword(!isMaskingPassword);
   };
-
   const [signupFormData, onChangeSignupFormData] = useInputs<{
-    id: string;
     username: string;
     password: string;
-    confirmPassword: string;
-  }>({ id: '', username: '', password: '', confirmPassword: '' });
+    encPassword: string;
+  }>({ username: '', password: '', encPassword: '' });
 
   const onSubmitSignupFormData = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSwitchAuthStep('Sign in');
-    // TODO 사인업 api연결
+    postSignupData(signupFormData).then((_) => {
+      onSwitchAuthStep('Sign in');
+    });
 
     return null;
   };
@@ -73,8 +73,8 @@ const SignupSection = ({ onSwitchAuthStep }: ISignupSectionProps) => {
             placeholder="Enter your Username"
             type="text"
             variant="standard"
-            name="id"
-            value={signupFormData.id}
+            name="username"
+            value={signupFormData.username}
             onChange={onChangeSignupFormData}
             InputProps={{
               startAdornment: (
@@ -100,7 +100,10 @@ const SignupSection = ({ onSwitchAuthStep }: ISignupSectionProps) => {
               '& .MuiInput-underline.Mui-focused:after': {
                 borderBottom: `2px solid ${palette.primary.main}`,
               },
-              '& .MuiInput-underline:hover:before': {
+              '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+                borderBottom: `2px solid ${palette.white}`,
+              },
+              '& .MuiInput-underline.Mui-hover:not(.Mui-disabled):before': {
                 borderBottom: `2px solid ${palette.white}`,
               },
             }}
@@ -148,7 +151,10 @@ const SignupSection = ({ onSwitchAuthStep }: ISignupSectionProps) => {
               '& .MuiInput-underline.Mui-focused:after': {
                 borderBottom: `2px solid ${palette.primary.main}`,
               },
-              '& .MuiInput-underline:hover:before': {
+              '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+                borderBottom: `2px solid ${palette.white}`,
+              },
+              '& .MuiInput-underline.Mui-hover:not(.Mui-disabled):before': {
                 borderBottom: `2px solid ${palette.white}`,
               },
             }}
@@ -159,8 +165,8 @@ const SignupSection = ({ onSwitchAuthStep }: ISignupSectionProps) => {
             placeholder="Confirm your Password"
             type={isMaskingPassword ? 'text' : 'password'}
             variant="standard"
-            name="confirmPassword"
-            value={signupFormData.confirmPassword}
+            name="encPassword"
+            value={signupFormData.encPassword}
             onChange={onChangeSignupFormData}
             InputProps={{
               startAdornment: (
@@ -196,7 +202,10 @@ const SignupSection = ({ onSwitchAuthStep }: ISignupSectionProps) => {
               '& .MuiInput-underline.Mui-focused:after': {
                 borderBottom: `2px solid ${palette.primary.main}`,
               },
-              '& .MuiInput-underline:hover:before': {
+              '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+                borderBottom: `2px solid ${palette.white}`,
+              },
+              '& .MuiInput-underline.Mui-hover:not(.Mui-disabled):before': {
                 borderBottom: `2px solid ${palette.white}`,
               },
             }}

@@ -11,12 +11,116 @@ import {
   FormControl,
   Button,
   Icon,
+  Tooltip,
 } from '@mui/material';
 import { WarningAmber } from '@mui/icons-material';
 import Template from '@/components/common/CustomUI/template';
 import palette from '@/styles/mui/palette';
 import theme from '@/styles/mui/theme';
+import { useWeb3 } from '@/lib/hooks/useWeb3';
+import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
+import { ADDR_TOKEN_KEY } from '@/constants/token';
+import { CoffeeeAbi, CONTRACT_ADDR } from '@/lib/abis/OpenPromptABI';
+import CustomNoMaxWidthTooltip from '@/components/common/CustomUI/card/CustomNoMaxWidthTooltip';
+import { useInputs } from '@/lib/hooks/useInputs';
+
 const CopyrightRegisterPage = () => {
+  const { web3 } = useWeb3();
+  const [userAddr] = useLocalStorage(ADDR_TOKEN_KEY, '');
+  const [copyrightForRegisterFormData, onChangeCopyrightForRegisterFormData] =
+    useInputs<{
+      prompt: string;
+      AI_model: string;
+      currentAddress: string;
+      copyright_name: string;
+    }>({
+      prompt: '',
+      AI_model: '',
+      currentAddress: userAddr,
+      copyright_name: '',
+    });
+
+  const onSubmitCopyrightForRegisterFormData = (
+    e: React.FormEvent<HTMLFormElement>,
+  ) => {
+    e.preventDefault();
+    console.log(copyrightForRegisterFormData);
+  };
+
+  // ---------------------NFT----------------------
+  if (!web3 || !userAddr) return null;
+
+  const contract = new web3.eth.Contract(CoffeeeAbi, CONTRACT_ADDR);
+
+  const data1 = (contract.methods['mintNFT'] as any)(
+    'ipfs://QmVbwfFH65T4wBptztFDbeikwAfeBDSyq7y25TH13KJcVn',
+    '333333333333333',
+  ).encodeABI();
+  const mintParam = {
+    from: userAddr,
+    to: CONTRACT_ADDR,
+    gasLimit: web3.utils.toHex('50000000'),
+    gasPrice: web3.utils.toHex(web3.utils.toWei('0.0000000000000001', 'ether')),
+    data: data1,
+  };
+  const onMint = async () => {
+    try {
+      await window.ethereum
+        ?.request({
+          method: 'eth_sendTransaction',
+          params: [mintParam],
+        })
+        .then((res) => console.log('success', res));
+    } catch (error) {
+      console.error('An error occurred while making the donation: ', error);
+    }
+  };
+
+  const getNFTsByOwner = async (address: string) => {
+    const tokens = await (contract.methods.getNFTsByOwner as any)(
+      address,
+    ).call();
+
+    console.log(tokens);
+    return tokens;
+  };
+
+  const onGetNFT = async (userAddr: string) => {
+    try {
+      const tokenIds = await getNFTsByOwner(userAddr);
+      console.log('Received token IDs:', tokenIds);
+
+      const uriPromises = tokenIds.map(async (tokenId: any) => {
+        const data = (contract.methods['getIpfsUri'] as any)(
+          tokenId,
+        ).encodeABI();
+        const getIpfsUriParam = {
+          from: userAddr,
+          to: CONTRACT_ADDR,
+          data: data,
+        };
+
+        return window.ethereum?.request({
+          method: 'eth_call',
+          params: [getIpfsUriParam],
+        });
+      });
+
+      const uris = await Promise.all(uriPromises);
+      console.log('NFTs URIs:', uris);
+
+      const urisDecoded = uris.map((uri) => {
+        const str = web3.utils.hexToUtf8(uri);
+        const match = str.match(/ipfs:\/\/\S+/);
+        return match ? match[0].replace(/\0+$/, '') : '';
+      });
+      console.log('Decoded URIs:', urisDecoded);
+    } catch (error) {
+      console.error('An error occurred while making the donation: ', error);
+    }
+  };
+  // -------------------------------------------
+
   return (
     <Template>
       <Box sx={{ textAlign: 'center', mb: '67px' }}>
@@ -27,7 +131,7 @@ const CopyrightRegisterPage = () => {
           Copyright register
         </Typography>
       </Box>
-      <form>
+      <form onSubmit={onSubmitCopyrightForRegisterFormData}>
         <Stack
           gap="24px"
           sx={{
@@ -39,8 +143,8 @@ const CopyrightRegisterPage = () => {
             <Typography variant="body5">Prompt</Typography>
             <Box
               component={TextareaAutosize}
-              name="Outlined"
-              placeholder="Type in here…"
+              name="prompt"
+              placeholder="Enter your Prompt"
               minRows={5}
               sx={{
                 border: 'none',
@@ -56,44 +160,55 @@ const CopyrightRegisterPage = () => {
                   outline: `2px solid ${palette.primary.main}`,
                 },
               }}
+              onChange={onChangeCopyrightForRegisterFormData}
             />
           </Box>
 
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <Typography variant="body5">Current Account</Typography>
-            <TextField
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Box sx={{ paddingLeft: '10px', marginTop: '6px' }}>
-                      <img
-                        src="/imgs/meta-logo.png"
-                        width="24"
-                        height="24"
-                        alt="Ethereum Logo"
-                      />
-                    </Box>
-                  </InputAdornment>
-                ),
-              }}
-              variant="outlined"
-              disabled
-              value={'0X13'}
-              sx={{
-                '&:hover': {
-                  border: 'none',
-                },
-              }}
-            />
-          </Box>
-
+          <CustomNoMaxWidthTooltip
+            arrow
+            sx={{ maxWidth: 'none' }}
+            title={<Typography variant="body1">{userAddr}</Typography>}
+          >
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <Typography variant="body5">Current Account</Typography>
+              <TextField
+                name="currentAddress"
+                variant="outlined"
+                disabled
+                value={userAddr}
+                onChange={onChangeCopyrightForRegisterFormData}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Box sx={{ paddingLeft: '10px', marginTop: '6px' }}>
+                        <img
+                          src="/imgs/meta-logo.png"
+                          width="24"
+                          height="24"
+                          alt="Ethereum Logo"
+                        />
+                      </Box>
+                    </InputAdornment>
+                  ),
+                }}
+                sx={{
+                  color: palette.white,
+                  '&:hover': {
+                    border: 'none',
+                  },
+                }}
+              />
+            </Box>
+          </CustomNoMaxWidthTooltip>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <Typography variant="body5">AI Model</Typography>
             <FormControl>
               <RadioGroup
                 row
                 aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
+                name="AI_model"
+                value={copyrightForRegisterFormData.AI_model}
+                onChange={onChangeCopyrightForRegisterFormData}
               >
                 <FormControlLabel
                   value="Midjourney"
@@ -156,7 +271,12 @@ const CopyrightRegisterPage = () => {
             </FormControl>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <Typography variant="body5">Copyright Name</Typography>
-              <TextField variant="outlined" value={'0X13'} />
+              <TextField
+                variant="outlined"
+                name="copyright_name"
+                value={copyrightForRegisterFormData.copyright_name}
+                onChange={onChangeCopyrightForRegisterFormData}
+              />
             </Box>
           </Box>
         </Stack>
@@ -174,6 +294,23 @@ const CopyrightRegisterPage = () => {
         >
           Register
         </Button>
+        {/* <Button
+          variant="rounded"
+          type="button"
+          sx={{
+            width: '100%',
+            backgroundColor: theme.palette.primary.main,
+            color: theme.palette.black.main,
+            '&:hover': {
+              backgroundColor: theme.palette.primary.dark,
+            },
+          }}
+          onClick={() => {
+            onGetNFT(userAddr);
+          }}
+        >
+          onGetNFT
+        </Button> */}
       </form>
 
       <Box
