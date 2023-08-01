@@ -128,9 +128,82 @@ const HomePage = () => {
         sx={{
           paddingX: '100px',
           backgroundColor: palette.black.main,
-          marginTop: '100vh',
+          minHeight: '100vh',
+          paddingTop: '80px',
         }}
-      ></Container>
+      >
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '160px' }}>
+          {/*  */}
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Typography
+              variant="h3"
+              sx={{
+                fontFamily: 'Oswald',
+                fontWeight: 'Medium',
+                fontSize: '60px',
+              }}
+            >
+              What is OpenPrompt?
+            </Typography>
+
+            <Typography
+              sx={{
+                fontFamily: 'Oswald',
+                fontSize: '40px',
+                fontWeight: 300,
+                marginTop: '40px',
+                background: `linear-gradient(to left,${
+                  palette.primary.main
+                }, ${'#6843EC'})`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >{`There hasn't been a direct way for users to generate income using prompts usable in Midjourney, DALL-E, Stable Diffusion, etc. However, with OpenPrompt, users can generate profits by selling their own prompts, while also having the ability to sell the copyright to the prompts with licensed usage rights as NFTs.`}</Typography>
+          </Box>
+
+          {/*  */}
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: 'Noto Sans',
+                fontSize: '40px',
+                fontWeight: 'medium',
+                marginTop: '40px',
+                lineHeight: 'auto',
+                textAlign: 'center',
+              }}
+            >
+              {`A new AI prompt marketplace “OpenPrompt”`}
+              <br />
+              {`
+            based on blockchain technology.`}
+            </Typography>
+          </Box>
+          {/*  */}
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          ></Box>
+        </Box>
+      </Container>
     </Box>
   );
 };

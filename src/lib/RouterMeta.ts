@@ -41,8 +41,8 @@ const RouterMeta: RouterMetaType = {
   },
   SuccessPage: {
     name: 'Success',
-    path: '/success',
-    isShow: false,
+    path: '/success/:successtype',
+    isShow: true,
   },
   MyPage: {
     name: 'Mypage',
