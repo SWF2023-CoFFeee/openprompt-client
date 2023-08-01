@@ -10,6 +10,7 @@ import {
   ContentOwnNFT,
   ContentPersonalInfo,
 } from './Contents';
+import CustomModal from './CustomModal';
 
 const MyPage = () => {
   const [content, setContent] = useState<ContentType>('purchasedTickets');
@@ -62,6 +63,7 @@ const MyPage = () => {
       <Typography variant="h3" color="white" sx={{ marginY: '10px' }}>
         Mypage
       </Typography>
+      <CustomModal />
       <Box sx={{ marginY: '10px' }}>
         <CustomTabs
           buttons={Object.keys(contentsData).map((value) => ({
