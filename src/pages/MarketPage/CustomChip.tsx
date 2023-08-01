@@ -5,8 +5,8 @@ const StableDiffusionICon = () => {
   return (
     <img
       src="/imgs/stable-diffusion-logo.png"
-      width="24"
-      height="24"
+      width="18"
+      height="18"
       alt="Stable Diffusion Logo"
     />
   );
@@ -26,7 +26,7 @@ const CustomChip: React.FC<CustomChipProps> = ({ AI_type }) => {
         label={AI_type}
         icon={AI_type_icon}
         sx={{
-          minWidth: '40%',
+          maxWidth: '120px',
           height: '25px',
           backgroundColor: palette.grey[600],
           color: 'white',
@@ -37,6 +37,7 @@ const CustomChip: React.FC<CustomChipProps> = ({ AI_type }) => {
             fontWeight: 'normal',
             color: palette.grey[200],
             fonttFamily: 'Noto Sans',
+            p: '6px',
           },
         }}
       />

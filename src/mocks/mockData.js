@@ -62,6 +62,26 @@ export const mockRightsOfUsageProductData = {
             category: 'CyberPunk',
             prompt_type: 'StableDiffusion',
         },
+        {
+            id: "user5060",
+            address: '0x0b2dCB2e5a5D106c23A868785Ac0405Ae9e3b28D',
+            price: '3.75000ETH',
+            thumbNail: 'https://ipfs.io/ipfs/QmPbxeGcXhYQQNgsC6a36dDyYUcHgMLnGKnF8pVFmGsvqi',
+            like: 1,
+            options: 'ALL',
+            category: 'Anime',
+            prompt_type: 'MidJourney',
+        },
+        {
+            id: "user6070",
+            address: '0xc3CABaa80c4A9079E8ea09c7d74313F2a85C53f2',
+            price: '4.97531ETH',
+            thumbNail: 'https://ipfs.io/ipfs/QmPbxeGcXhYQQNgsC6a36dDyYUcHgMLnGKnF8pVFmGsvqi',
+            like: 3,
+            options: '사용권',
+            category: 'CyberPunk',
+            prompt_type: 'StableDiffusion',
+        },
 
     ]
 };
