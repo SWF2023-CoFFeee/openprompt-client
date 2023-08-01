@@ -10,12 +10,14 @@ import {
   Button,
 } from '@mui/material';
 import { NavLink, useNavigate } from 'react-router-dom';
-
 import { Logout } from '@mui/icons-material';
+import { LogoImage } from '@/assets/images';
+
 import RouterMeta from '@/lib/RouterMeta';
 import palette from '@/styles/mui/palette';
 import { ADDR_TOKEN_KEY } from '@/constants/token';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
+import Logo from '@/assets/svgs/Logo';
 
 const ResponsiveAppBar = () => {
   const [userAddr, _setUserAddr_, _deleteUserAddr_, clearStorage] =
@@ -47,7 +49,10 @@ const ResponsiveAppBar = () => {
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, marginLeft: '30px' }}>
             <NavLink to={'/'}>
-              <img src={'/imgs/logo/coffeee-logo-white.png'} alt="home" />
+              <Stack direction="row" alignItems="center" gap="8px">
+                <img src={LogoImage} alt="home" width="44px" height="44px" />
+                <Logo />
+              </Stack>
             </NavLink>
           </Box>
           <Stack

@@ -5,10 +5,11 @@ import {
   TextField,
   TextareaAutosize,
 } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Lottie from 'react-lottie';
 import palette from '@/styles/mui/palette';
 import Template from '@/components/common/CustomUI/template';
+import RouterMeta from '@/lib/RouterMeta';
 import successLottie from './openprompt_success.json';
 
 export const SUCCESS_TYPE = ['copyright_regist', 'copyright_buy', 'ticket_buy'];
@@ -16,9 +17,11 @@ type TransActionVariant = 'copyright_regist' | 'copyright_buy' | 'ticket_buy';
 
 const SuccessPage: React.FC<SuccessPageProps> = () => {
   const { successtype } = useParams();
+  const { state } = useLocation();
+
   return (
     <Template>
-      <LottieComponent variant={successtype} />
+      <LottieComponent variant={successtype} state={state} />
     </Template>
   );
 };
@@ -27,9 +30,11 @@ export default SuccessPage;
 
 interface SuccessPageProps {
   variant: TransActionVariant;
+  state: any;
 }
 
-const LottieComponent: React.FC<any> = ({ variant }) => {
+const LottieComponent: React.FC<any> = ({ variant, state }) => {
+  const navigate = useNavigate();
   let successType = '';
   switch (variant) {
     case 'copyright_regist':
@@ -58,9 +63,9 @@ const LottieComponent: React.FC<any> = ({ variant }) => {
   return (
     <Box>
       <Lottie options={defaultOptions} height={240} width={240} />
-      <Box sx={{ marginTop: '40px' }}>
+      <Box sx={{ marginTop: '40px', width: '416px' }}>
         <Typography variant="h3" sx={{ marginBottom: '80px' }}>
-          Ticket purchase complete!
+          {successType}
         </Typography>
         <Box
           sx={{
@@ -71,45 +76,36 @@ const LottieComponent: React.FC<any> = ({ variant }) => {
           }}
         >
           <Typography variant="body5">Copyright Name</Typography>
-          <TextField
-            variant="outlined"
-            value={data_copyright_name}
-            disabled
+          <Box
             sx={{
-              '&.Mui-disabled': {
-                color: palette.white, // text color 변경
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: palette.primary.main, // border color 변경
-                },
-              },
+              padding: '12px 12px 12px 16px',
+              borderRadius: '8px',
+              border: '1px solid #AEFF29',
+              color: '#FFF',
             }}
-          />
+          >
+            <Typography variant="body1">
+              American Barbizon School_Satori Canton
+            </Typography>
+          </Box>
         </Box>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <Typography variant="body5">Prompt</Typography>
           <Box
-            component={TextareaAutosize}
-            name="Outlined"
-            placeholder="Type in here…"
-            value={data_prompt}
-            minRows={5}
-            disabled // 추가된 속성
             sx={{
-              border: 'none',
-              width: '100%',
-              backgroundColor: 'transparent',
-              borderColor: palette.primary.main, // 추가된 속성
-              outline: `2px solid ${palette.primary.main}`,
+              padding: '12px 12px 12px 16px',
               borderRadius: '8px',
-              padding: '12px 16px',
-              fontSize: '16px',
-              fontFamily: 'Noto Sans',
-              color: palette.white,
-              '&:focus': {
-                outline: `2px solid ${palette.primary.main}`,
-              },
+              border: '1px solid #AEFF29',
+              color: '#FFF',
             }}
-          />
+          >
+            <Typography variant="body1">
+              Close up of a forest drwaing on white paper laying on a oak wooden
+              table with color pencils and coffee on it, shot from above in
+              natural sunlight. The style is hyper - realistic, with a high
+              level of detail in the texture.
+            </Typography>
+          </Box>
         </Box>
         <Box
           sx={{
@@ -123,6 +119,9 @@ const LottieComponent: React.FC<any> = ({ variant }) => {
         >
           <Button
             variant="rounded"
+            onClick={() => {
+              navigate(RouterMeta.MarketPage.path);
+            }}
             sx={{
               width: '50%',
               backgroundColor: palette.grey[300],
@@ -135,7 +134,13 @@ const LottieComponent: React.FC<any> = ({ variant }) => {
           >
             Market
           </Button>
-          <Button sx={{ width: '50%' }} variant="roundedOutlined">
+          <Button
+            sx={{ width: '50%' }}
+            variant="roundedOutlined"
+            onClick={() => {
+              navigate(RouterMeta.MyPage.path);
+            }}
+          >
             MyPage
           </Button>
         </Box>
