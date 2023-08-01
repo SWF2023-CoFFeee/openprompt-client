@@ -39,7 +39,7 @@ const ResponsiveAppBar = () => {
         paddingY: '2px',
         paddingTop: '5px',
         backgroundColor: 'rgba(255, 255, 2555, 0.15)',
-        backdropFilter: 'blur(80px)',
+        backdropFilter: 'blur(10px)',
         boxShadow: '0px 4px 40px 0px rgba(0, 0, 0, 0.04)',
       }}
     >
