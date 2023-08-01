@@ -6,7 +6,6 @@ import {
   Container,
   Grid,
   Typography,
-  IconButton,
   Avatar,
   CardActions,
   Button,
@@ -15,6 +14,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import palette from '@/styles/mui/palette';
 import CustomChip from './CustomChip';
+
 interface IProduct {
   id: string;
   address: string;
@@ -151,7 +151,7 @@ const CardExample: React.FC<ICardExampleProps> = ({ product }) => {
               display: 'flex',
               width: '300px',
               height: '100%',
-              background: `linear-gradient(-180deg, rgba(0, 0, 0, 1) 0%, rgba(128, 128, 128, 0) 30%), linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(128, 128, 128, 0) 30%)`,
+              background: `linear-gradient(-180deg, rgba(0, 0, 0, 0.48) 0%, rgba(128, 128, 128, 0) 30%), linear-gradient(0deg, rgba(0, 0, 0, 0.48) 0%, rgba(128, 128, 128, 0) 30%)`,
               backgroundRepeat: 'no-repeat, no-repeat',
               backgroundPosition: 'top center, bottom center',
             }}
@@ -240,19 +240,23 @@ const CardExample: React.FC<ICardExampleProps> = ({ product }) => {
                         display: 'flex',
                         flexDirection: 'row',
                         justifyContent: 'flex-end',
+                        gap: '4px',
                       }}
                     >
-                      <Typography variant="body2">{product.like}</Typography>
-                      <IconButton
+                      <Typography variant="body2" sx={{ height: '32px' }}>
+                        {product.like}
+                      </Typography>
+                      <Box
                         sx={{
                           display: 'flex',
                           justifyContent: 'flex-end',
+                          alignItems: 'center',
                           color: 'white',
                         }}
                         onClick={(e) => handleLikeClick(e)}
                       >
                         {liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-                      </IconButton>
+                      </Box>
                     </Box>
                   </Box>
                 </CardContent>
