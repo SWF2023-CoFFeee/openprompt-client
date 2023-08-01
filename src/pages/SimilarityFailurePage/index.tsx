@@ -1,8 +1,10 @@
 import { Button, Box, Typography, Stack, Icon } from '@mui/material';
 import Lottie from 'react-lottie';
 import { CheckCircleOutline } from '@mui/icons-material';
+import { useNavigate } from 'react-router';
 import Template from '@/components/common/CustomUI/template';
 import palette from '@/styles/mui/palette';
+import RouterMeta from '@/lib/RouterMeta';
 import failLottie from './openprompt_fail.json';
 
 const SimilarityFailurePage = () => {
@@ -16,6 +18,7 @@ const SimilarityFailurePage = () => {
 export default SimilarityFailurePage;
 
 const LottieComponent: React.FC<any> = () => {
+  const navigate = useNavigate();
   const defaultOptions = {
     loop: false,
     autoplay: true,
@@ -170,10 +173,19 @@ const LottieComponent: React.FC<any> = () => {
                 backgroundColor: palette.grey[400],
               },
             }}
+            onClick={() => {
+              navigate(-1);
+            }}
           >
             Back
           </Button>
-          <Button sx={{ width: '50%' }} variant="roundedOutlined">
+          <Button
+            sx={{ width: '50%' }}
+            variant="roundedOutlined"
+            onClick={() => {
+              navigate(RouterMeta.MyPage.path);
+            }}
+          >
             MyPage
           </Button>
         </Box>

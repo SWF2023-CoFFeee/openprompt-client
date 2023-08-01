@@ -57,7 +57,7 @@ const ResponsiveAppBar = () => {
           </Box>
           <Stack
             direction="row"
-            gap="1em"
+            gap="2em"
             alignItems="center"
             sx={{ marginRight: '100px' }}
           >

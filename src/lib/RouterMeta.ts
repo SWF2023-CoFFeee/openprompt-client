@@ -30,7 +30,7 @@ const RouterMeta: RouterMetaType = {
     isShow: false,
   },
   CopyrightRegisterPage: {
-    name: 'Register Copyright',
+    name: 'RegisterCopyright',
     path: '/register/copyright',
     isShow: true,
   },

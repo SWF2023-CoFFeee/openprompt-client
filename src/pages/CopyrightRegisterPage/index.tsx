@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import { WarningAmber } from '@mui/icons-material';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Template from '@/components/common/CustomUI/template';
 import palette from '@/styles/mui/palette';
 import theme from '@/styles/mui/theme';
@@ -26,6 +27,7 @@ import { useInputs } from '@/lib/hooks/useInputs';
 import { getList, postRegister } from '@/lib/apis/copyright';
 
 const CopyrightRegisterPage = () => {
+  const navigate = useNavigate();
   const { web3 } = useWeb3();
   const [userAddr] = useLocalStorage(ADDR_TOKEN_KEY, '');
   const [copyrightForRegisterFormData, onChangeCopyrightForRegisterFormData] =
@@ -50,9 +52,7 @@ const CopyrightRegisterPage = () => {
   };
 
   useEffect(() => {
-    getList().then((res) => {
-      console.log(res);
-    });
+    getList().then((res) => console.log(res));
   }, []);
 
   // ---------------------NFT----------------------
@@ -82,7 +82,10 @@ const CopyrightRegisterPage = () => {
           method: 'eth_sendTransaction',
           params: [mintParam],
         })
-        .then((res) => console.log('success', res));
+        .then((res) => {
+          console.log('success', res);
+          navigate('/success/copyright_regist');
+        });
     } catch (error) {
       console.error('An error occurred while making the donation: ', error);
     }
@@ -324,7 +327,7 @@ const CopyrightRegisterPage = () => {
         </Button> */}
       </form>
 
-      <Box
+      {/* <Box
         sx={{
           border: '1px solid #E74A3B',
           backgroundColor: 'rgba(231, 74, 59, 0.15)',
@@ -351,7 +354,7 @@ const CopyrightRegisterPage = () => {
           There is a prompt with 60% similarity to the purchased ticket, and
           registration is not possible.
         </Typography>
-      </Box>
+      </Box> */}
     </Template>
   );
 };

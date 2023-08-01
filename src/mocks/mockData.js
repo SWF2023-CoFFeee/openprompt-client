@@ -43,7 +43,7 @@ export const mockRightsOfUsageProductData = {
             prompt_type: 'DALLE',
         },
         {
-            id: "user5060",
+            id: "user506011",
             address: '0x0b2dCB2e5a5D106c23A868785Ac0405Ae9e3b28D',
             price: '3.75000ETH',
             thumbNail: 'https://ipfs.io/ipfs/QmPbxeGcXhYQQNgsC6a36dDyYUcHgMLnGKnF8pVFmGsvqi',
@@ -53,7 +53,7 @@ export const mockRightsOfUsageProductData = {
             prompt_type: 'MidJourney',
         },
         {
-            id: "user6070",
+            id: "user6071110",
             address: '0xc3CABaa80c4A9079E8ea09c7d74313F2a85C53f2',
             price: '4.97531ETH',
             thumbNail: 'https://ipfs.io/ipfs/QmPbxeGcXhYQQNgsC6a36dDyYUcHgMLnGKnF8pVFmGsvqi',
