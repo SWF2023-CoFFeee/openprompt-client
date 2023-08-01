@@ -14,12 +14,10 @@ import {
   VisibilityOff,
   Visibility,
 } from '@mui/icons-material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useInputs } from '@/lib/hooks/useInputs';
 import theme from '@/styles/mui/theme';
 import palette from '@/styles/mui/palette';
-import apiClient from '@/lib/apis/apiClient';
-import { TEST_URL } from '@/constants/apiUrl';
 import { postSignupData } from '@/lib/apis/user';
 import { TAuthStep } from '.';
 
@@ -40,7 +38,7 @@ const SignupSection = ({ onSwitchAuthStep }: ISignupSectionProps) => {
 
   const onSubmitSignupFormData = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    postSignupData(signupFormData).then((res) => {
+    postSignupData(signupFormData).then((_) => {
       onSwitchAuthStep('Sign in');
     });
 
