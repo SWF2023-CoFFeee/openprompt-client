@@ -13,7 +13,6 @@ import {
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import palette from '@/styles/mui/palette';
-import sampleImage from './sample-card-img.png';
 import CustomChip from './CustomChip';
 
 interface IProduct {
