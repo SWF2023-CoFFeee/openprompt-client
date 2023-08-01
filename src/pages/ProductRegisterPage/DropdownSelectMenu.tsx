@@ -30,7 +30,9 @@ interface DropdownTextFieldProps {
   label: string;
   options: DropdownOption[];
   selectedValue: string;
-  onChange: (selectedValue: string) => void;
+  onChange: any;
+  name: string;
+  value: string;
 }
 
 const customStyles: {
@@ -93,6 +95,8 @@ const DropdownSelectMenu: React.FC<DropdownTextFieldProps> = ({
   options,
   selectedValue,
   onChange,
+  name,
+  value,
 }) => {
   // selectedValue의 기본값을 첫 번째 옵션의 값으로 설정
   const defaultValue = options[0]?.value || '';
@@ -101,11 +105,12 @@ const DropdownSelectMenu: React.FC<DropdownTextFieldProps> = ({
   return (
     <FormControl variant="outlined" fullWidth sx={customStyles.root}>
       <Select
-        value={currentValue} // 수정된 값 사용
-        onChange={(event) => onChange(event.target.value as string)}
+        name={name}
+        value={value}
+        onChange={onChange}
         input={
           <OutlinedInput
-            placeholder={currentValue ? '' : label}
+            placeholder={'Select'}
             sx={customStyles.input}
             endAdornment={<ArrowIcon />}
           />
