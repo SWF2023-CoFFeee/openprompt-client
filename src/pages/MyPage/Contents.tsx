@@ -5,7 +5,6 @@ import {
   CardContent,
   CardMedia,
   Container,
-  Divider,
   Grid,
   Typography,
 } from '@mui/material';

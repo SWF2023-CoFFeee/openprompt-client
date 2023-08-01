@@ -30,7 +30,7 @@ const CustomChip: React.FC<CustomChipProps> = ({ AI_type }) => {
           height: '25px',
           backgroundColor: palette.grey[600],
           color: 'white',
-          marginBottom: '20px',
+          marginBottom: '0px',
           paddingLeft: '5px',
           '& .MuiChip-label': {
             fontSize: '12px',
