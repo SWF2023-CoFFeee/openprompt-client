@@ -6,6 +6,8 @@ import queryClient from '@/lib/queries/queryClient';
 import DynamicRoutes from './DynamicRoutes';
 import theme from './styles/mui/theme';
 import './App.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const globalStyles = css`
   * {
