@@ -15,6 +15,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import Template from '@/components/common/CustomUI/template';
 import palette from '@/styles/mui/palette';
+import CustomNoMaxWidthTooltip from '@/components/common/CustomUI/card/CustomNoMaxWidthTooltip';
+import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
+import { ADDR_TOKEN_KEY } from '@/constants/token';
 import ImageBox from './ImageBox';
 import DropdownSelectMenu from './DropdownSelectMenu';
 
@@ -26,6 +29,7 @@ const MetaIcon = () => {
 
 const ProductRegisterPage = () => {
   const [selectedColor, setSelectedColor] = useState<string>('');
+  const [userAddr] = useLocalStorage(ADDR_TOKEN_KEY, '');
 
   return (
     <Template>
@@ -65,30 +69,36 @@ const ProductRegisterPage = () => {
               <RowRadioButtonsGroup />
             </Box>
             {/* Current Account: disabled TextFied */}
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '10px',
-                marginTop: '24px',
-              }}
+            <CustomNoMaxWidthTooltip
+              arrow
+              sx={{ maxWidth: 'none' }}
+              title={<Typography variant="body1">{userAddr}</Typography>}
             >
-              <Typography variant="body5">Current Account</Typography>
-              <TextField
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Box sx={{ paddingLeft: '10px', marginTop: '6px' }}>
-                        <MetaIcon />
-                      </Box>
-                    </InputAdornment>
-                  ),
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '10px',
+                  marginTop: '24px',
                 }}
-                variant="outlined"
-                disabled
-                value={'0X13'}
-              />
-            </Box>
+              >
+                <Typography variant="body5">Current Account</Typography>
+                <TextField
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Box sx={{ paddingLeft: '10px', marginTop: '6px' }}>
+                          <MetaIcon />
+                        </Box>
+                      </InputAdornment>
+                    ),
+                  }}
+                  variant="outlined"
+                  disabled
+                  value={userAddr}
+                />
+              </Box>
+            </CustomNoMaxWidthTooltip>
             {/* Image: ImageBox */}
             <Box
               sx={{
