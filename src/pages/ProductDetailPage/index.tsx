@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useParams } from 'react-router-dom';
 import Template from '@/components/common/CustomUI/template';
 import palette from '@/styles/mui/palette';
 
@@ -35,6 +36,9 @@ const EthereumIcon = () => {
 };
 
 const ProductDetailPage = () => {
+  const { productid } = useParams();
+  // TODO 이걸로 GET 하세요
+
   // 수정해야함
   const product_type = 'Ticket';
   const owner_id = 'true';
