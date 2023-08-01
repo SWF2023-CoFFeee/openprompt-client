@@ -10,9 +10,10 @@ import {
   ContentOwnNFT,
   ContentPersonalInfo,
 } from './Contents';
+import CustomModal from './CustomModal';
 
 const MyPage = () => {
-  const [content, setContent] = useState<ContentType>('donationHistory');
+  const [content, setContent] = useState<ContentType>('purchasedTickets');
   const [showContent, setShowContent] = useState(true);
 
   type ContentData = {
@@ -24,24 +25,29 @@ const MyPage = () => {
   };
 
   const contentsData: ContentData = {
-    donationHistory: {
-      label: '기부 이력',
-      component: <ContentDonateHistory />,
-    },
-    NFT: {
-      label: 'NFT',
+    purchasedTickets: {
+      label: 'Purchased tickets',
       component: <ContentOwnNFT />,
     },
-    personalInfo: {
-      label: '개인정보',
+    registeredCopyrights: {
+      label: 'Registered copyrights',
+      component: <ContentDonateHistory />,
+    },
+    onSale: {
+      label: 'On sale',
+      component: <ContentPersonalInfo />,
+    },
+    transactionHistory: {
+      label: 'Transaction history',
       component: <ContentPersonalInfo />,
     },
   };
 
   const refs: Record<ContentType, React.RefObject<HTMLButtonElement>> = {
-    donationHistory: useRef(null),
-    NFT: useRef(null),
-    personalInfo: useRef(null),
+    purchasedTickets: useRef(null),
+    registeredCopyrights: useRef(null),
+    onSale: useRef(null),
+    transactionHistory: useRef(null),
   };
 
   const handleChangeContent = (value: ContentType) => {
@@ -53,13 +59,11 @@ const MyPage = () => {
   };
 
   return (
-    <Template variant="animation" withBackButton>
-      <Typography variant="subtitle1" color="primary" sx={{ marginY: '10px' }}>
-        마이페이지
+    <Template variant="animation">
+      <Typography variant="h3" color="white" sx={{ marginY: '10px' }}>
+        Mypage
       </Typography>
-      <Typography color="white" variant="h2" sx={{ marginBottom: '10px' }}>
-        나의 기부 이력
-      </Typography>
+      <CustomModal />
       <Box sx={{ marginY: '10px' }}>
         <CustomTabs
           buttons={Object.keys(contentsData).map((value) => ({
@@ -72,10 +76,10 @@ const MyPage = () => {
         />
       </Box>
       <Container
-        maxWidth="md"
+        // maxWidth="md"
         sx={{
           paddingTop: '20px',
-          minHeight: '500px',
+          minHeight: '640px',
           width: '100%',
         }}
       >
