@@ -22,11 +22,32 @@ import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
 import { ADDR_TOKEN_KEY } from '@/constants/token';
 import { CoffeeeAbi, CONTRACT_ADDR } from '@/lib/abis/OpenPromptABI';
 import CustomNoMaxWidthTooltip from '@/components/common/CustomUI/card/CustomNoMaxWidthTooltip';
+import { useInputs } from '@/lib/hooks/useInputs';
 
 const CopyrightRegisterPage = () => {
   const { web3 } = useWeb3();
   const [userAddr] = useLocalStorage(ADDR_TOKEN_KEY, '');
+  const [copyrightForRegisterFormData, onChangeCopyrightForRegisterFormData] =
+    useInputs<{
+      prompt: string;
+      AI_model: string;
+      currentAddress: string;
+      copyright_name: string;
+    }>({
+      prompt: '',
+      AI_model: '',
+      currentAddress: userAddr,
+      copyright_name: '',
+    });
 
+  const onSubmitCopyrightForRegisterFormData = (
+    e: React.FormEvent<HTMLFormElement>,
+  ) => {
+    e.preventDefault();
+    console.log(copyrightForRegisterFormData);
+  };
+
+  // ---------------------NFT----------------------
   if (!web3 || !userAddr) return null;
 
   const contract = new web3.eth.Contract(CoffeeeAbi, CONTRACT_ADDR);
@@ -98,6 +119,7 @@ const CopyrightRegisterPage = () => {
       console.error('An error occurred while making the donation: ', error);
     }
   };
+  // -------------------------------------------
 
   return (
     <Template>
@@ -109,7 +131,7 @@ const CopyrightRegisterPage = () => {
           Copyright register
         </Typography>
       </Box>
-      <form>
+      <form onSubmit={onSubmitCopyrightForRegisterFormData}>
         <Stack
           gap="24px"
           sx={{
@@ -121,8 +143,8 @@ const CopyrightRegisterPage = () => {
             <Typography variant="body5">Prompt</Typography>
             <Box
               component={TextareaAutosize}
-              name="Outlined"
-              placeholder="Type in here…"
+              name="prompt"
+              placeholder="Enter your Prompt"
               minRows={5}
               sx={{
                 border: 'none',
@@ -138,6 +160,7 @@ const CopyrightRegisterPage = () => {
                   outline: `2px solid ${palette.primary.main}`,
                 },
               }}
+              onChange={onChangeCopyrightForRegisterFormData}
             />
           </Box>
 
@@ -149,6 +172,11 @@ const CopyrightRegisterPage = () => {
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <Typography variant="body5">Current Account</Typography>
               <TextField
+                name="currentAddress"
+                variant="outlined"
+                disabled
+                value={userAddr}
+                onChange={onChangeCopyrightForRegisterFormData}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -163,9 +191,6 @@ const CopyrightRegisterPage = () => {
                     </InputAdornment>
                   ),
                 }}
-                variant="outlined"
-                disabled
-                value={userAddr}
                 sx={{
                   color: palette.white,
                   '&:hover': {
@@ -181,7 +206,9 @@ const CopyrightRegisterPage = () => {
               <RadioGroup
                 row
                 aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
+                name="AI_model"
+                value={copyrightForRegisterFormData.AI_model}
+                onChange={onChangeCopyrightForRegisterFormData}
               >
                 <FormControlLabel
                   value="Midjourney"
@@ -244,13 +271,18 @@ const CopyrightRegisterPage = () => {
             </FormControl>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <Typography variant="body5">Copyright Name</Typography>
-              <TextField variant="outlined" value={'0X13'} />
+              <TextField
+                variant="outlined"
+                name="copyright_name"
+                value={copyrightForRegisterFormData.copyright_name}
+                onChange={onChangeCopyrightForRegisterFormData}
+              />
             </Box>
           </Box>
         </Stack>
         <Button
           variant="rounded"
-          type="button"
+          type="submit"
           sx={{
             width: '100%',
             backgroundColor: theme.palette.primary.main,
@@ -259,11 +291,10 @@ const CopyrightRegisterPage = () => {
               backgroundColor: theme.palette.primary.dark,
             },
           }}
-          onClick={onMint}
         >
-          Mint
+          Register
         </Button>
-        <Button
+        {/* <Button
           variant="rounded"
           type="button"
           sx={{
@@ -279,7 +310,7 @@ const CopyrightRegisterPage = () => {
           }}
         >
           onGetNFT
-        </Button>
+        </Button> */}
       </form>
 
       <Box
