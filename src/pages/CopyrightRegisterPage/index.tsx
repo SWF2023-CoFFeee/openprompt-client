@@ -49,13 +49,10 @@ const CopyrightRegisterPage = () => {
       'ipfs://QmVbwfFH65T4wBptztFDbeikwAfeBDSyq7y25TH13KJcVn',
       '111111111111',
     );
-    // postRegister(copyrightForRegisterFormData).then((res) => {
-    //   const { ipfs_uri, copyright_id } = res.data;
-    //   onMint(
-    //     'ipfs://QmVbwfFH65T4wBptztFDbeikwAfeBDSyq7y25TH13KJcVn',
-    //     'QmVbwfFH65T4wBptztFDbeikwAfeBDSyq7y25TH13KJcVn',
-    //   );
-    // });
+    postRegister(copyrightForRegisterFormData).then((res) => {
+      const { ipfs_uri, copyright_id } = res.data;
+      onMint(ipfs_uri, copyright_id);
+    });
   };
 
   // ---------------------NFT----------------------
@@ -94,50 +91,53 @@ const CopyrightRegisterPage = () => {
     }
   };
 
-  // const getNFTsByOwner = async (address: string) => {
-  //   const tokens = await (contract.methods.getNFTsByOwner as any)(
-  //     address,
-  //   ).call();
+  const getNFTsByOwner = async (address: string) => {
+    const contract = new web3.eth.Contract(CoffeeeAbi, CONTRACT_ADDR);
 
-  //   console.log(tokens);
-  //   return tokens;
-  // };
+    const tokens = await (contract.methods.getNFTsByOwner as any)(
+      address,
+    ).call();
 
-  // const onGetNFT = async (userAddr: string) => {
-  //   try {
-  //     const tokenIds = await getNFTsByOwner(userAddr);
-  //     console.log('Received token IDs:', tokenIds);
+    console.log(tokens);
+    return tokens;
+  };
 
-  //     const uriPromises = tokenIds.map(async (tokenId: any) => {
-  //       const data = (contract.methods['getIpfsUri'] as any)(
-  //         tokenId,
-  //       ).encodeABI();
-  //       const getIpfsUriParam = {
-  //         from: userAddr,
-  //         to: CONTRACT_ADDR,
-  //         data: data,
-  //       };
+  const onGetNFT = async (userAddr: string) => {
+    try {
+      const contract = new web3.eth.Contract(CoffeeeAbi, CONTRACT_ADDR);
 
-  //       return window.ethereum?.request({
-  //         method: 'eth_call',
-  //         params: [getIpfsUriParam],
-  //       });
-  //     });
+      const tokenIds = await getNFTsByOwner(userAddr);
+      console.log('Received token IDs:', tokenIds);
 
-  //     const uris = await Promise.all(uriPromises);
-  //     console.log('NFTs URIs:', uris);
+      const uriPromises = tokenIds.map(async (tokenId: any) => {
+        const data = (contract.methods['getIpfsUri'] as any)(
+          tokenId,
+        ).encodeABI();
+        const getIpfsUriParam = {
+          from: userAddr,
+          to: CONTRACT_ADDR,
+          data: data,
+        };
 
-  //     const urisDecoded = uris.map((uri) => {
-  //       const str = web3.utils.hexToUtf8(uri);
-  //       const match = str.match(/ipfs:\/\/\S+/);
-  //       return match ? match[0].replace(/\0+$/, '') : '';
-  //     });
-  //     console.log('Decoded URIs:', urisDecoded);
-  //   } catch (error) {
-  //     console.error('An error occurred while making the donation: ', error);
-  //   }
-  // };
-  // -------------------------------------------
+        return window.ethereum?.request({
+          method: 'eth_call',
+          params: [getIpfsUriParam],
+        });
+      });
+
+      const uris = await Promise.all(uriPromises);
+      console.log('NFTs URIs:', uris);
+
+      const urisDecoded = uris.map((uri) => {
+        const str = web3.utils.hexToUtf8(uri);
+        const match = str.match(/ipfs:\/\/\S+/);
+        return match ? match[0].replace(/\0+$/, '') : '';
+      });
+      console.log('Decoded URIs:', urisDecoded);
+    } catch (error) {
+      console.error('An error occurred while making the donation: ', error);
+    }
+  };
 
   return (
     <Template>
