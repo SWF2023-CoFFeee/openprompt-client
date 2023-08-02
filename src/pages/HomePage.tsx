@@ -1,19 +1,22 @@
 import React from 'react';
 import Slider from 'react-slick';
-import { Typography, Box, Container, Button, Stack, Grid } from '@mui/material';
+import {
+  Typography,
+  Box,
+  Container,
+  Button,
+  Stack,
+  Grid,
+  Paper,
+} from '@mui/material';
 import palette from '@/styles/mui/palette';
 
 const HomePage = () => {
-  const colors = ['red', 'green', 'blue', 'orange'];
-
-  const boxes = [
-    { position: [0, 0], color: colors[0] },
-    { position: [0, 1], color: colors[1] },
-    { position: [1, 1], color: colors[2] },
-    { position: [2, 0], color: colors[3] },
+  const isVisible = [
+    [false, true, false], // 0,0 0,1 0,2
+    [false, true, true], // 1,0 1,1 1,2
   ];
 
-  const colorIndex = 0;
   const settings = {
     dots: false,
     infinite: true,
@@ -214,24 +217,209 @@ const HomePage = () => {
           ></Box>
         </Box>
 
-        <Stack direction="row" gap="28px">
-          <Box
-            sx={{
-              width: '395px',
-              height: '380px',
-              borderRadius: '8px 40px',
-              background:
-                'linear-gradient(180deg, #FFF 0%, rgba(255, 255, 255, 0.00) 100%)',
-            }}
-          ></Box>
-          <Box
-            sx={{
-              width: '395px',
-              height: '380px',
-              borderRadius: '8px 40px',
-              border: '2px solid #AEFF29',
-            }}
-          ></Box>
+        {/* Grid Box Area */}
+        <Stack gap="32px" sx={{ mb: '160px' }}>
+          <Stack direction="row" gap="28px">
+            <Stack
+              justifyContent="space-between"
+              sx={{
+                width: '360px',
+                height: '370px',
+                borderRadius: '8px 40px',
+                background:
+                  'linear-gradient(180deg, #FFF 0%, rgba(255, 255, 255, 0.00) 100%)',
+                padding: '40px 32px',
+              }}
+            >
+              <Typography variant="body5" color={palette.black.main}>
+                OpenPrompt protects the copyright of the artworks using
+                blockchain technology. This prevents the unauthorized use of the
+                artist`s work, and provides users with a safe platform to
+                purchase these works.
+              </Typography>
+              <Stack
+                alignItems="center"
+                justifyContent="space-between"
+                direction="row"
+              >
+                <Typography variant="h3">
+                  Copyright
+                  <br />
+                  protection
+                </Typography>
+                <img src="/images/protection.png" alt="protection" />
+              </Stack>
+            </Stack>
+            <Stack
+              justifyContent="space-between"
+              sx={{
+                width: '360px',
+                height: '370px',
+                borderRadius: '8px 40px',
+                border: '2px solid #AEFF29',
+                padding: '40px 32px',
+              }}
+            >
+              <Typography variant="body5">
+                OpenPrompt provides a secure transaction environment using smart
+                contracts. This prevents potential issues during the trading
+                process and allows users to complete transactions safely.
+              </Typography>
+              <Stack
+                alignItems="center"
+                justifyContent="space-between"
+                direction="row"
+              >
+                <Typography variant="h3">
+                  Secure
+                  <br />
+                  transaction
+                </Typography>
+                <img src="/images/secure.png" alt="protection" />
+              </Stack>
+            </Stack>
+            <Stack
+              sx={{
+                width: '360px',
+                height: '370px',
+                opacity: 0,
+              }}
+            ></Stack>
+          </Stack>
+          <Stack direction="row" gap="28px">
+            <Stack
+              sx={{
+                width: '360px',
+                height: '370px',
+                borderRadius: '8px 40px',
+                opacity: 0,
+              }}
+            ></Stack>
+            <Stack
+              justifyContent="space-between"
+              sx={{
+                width: '360px',
+                height: '370px',
+                borderRadius: '40px',
+                background:
+                  'linear-gradient(180deg, #6843EC 0%, rgba(104, 67, 236, 0.00) 100%)',
+                padding: '40px 32px',
+              }}
+            >
+              <Typography variant="body5">
+                OpenPrompt is a decentralized prompt market based on blockchain
+                technology. This enables direct transactions between artists and
+                users, and lowers transaction costs by eliminating
+                intermediaries.
+              </Typography>
+              <Stack
+                alignItems="center"
+                justifyContent="space-between"
+                direction="row"
+              >
+                <Typography variant="h3">
+                  Decentralized
+                  <br />
+                  platform
+                </Typography>
+                <img src="/images/coin.png" alt="protection" />
+              </Stack>
+            </Stack>
+            <Stack
+              justifyContent="space-between"
+              sx={{
+                width: '360px',
+                height: '370px',
+                borderRadius: '40px 8px',
+                border: '2px solid #FFF',
+                padding: '40px 32px',
+              }}
+            >
+              <Typography variant="body5" color={palette.primary.main}>
+                OpenPrompt is a global market open to artists and users
+                worldwide. This allows artists to sell their works globally, and
+                users to purchase diverse works globally as well.
+              </Typography>
+              <Stack
+                alignItems="center"
+                justifyContent="space-between"
+                direction="row"
+              >
+                <Typography variant="h3" color={palette.primary.main}>
+                  Global market
+                  <br />
+                  access
+                </Typography>
+                <img src="/images/access.png" alt="protection" />
+              </Stack>
+            </Stack>
+          </Stack>
+        </Stack>
+        {/* {statisc} */}
+        <Stack gap="85px" sx={{ mb: '160px' }}>
+          <Typography variant="h4">Join a community of millions.</Typography>
+          <Stack direction="row" justifyContent="space-between">
+            <Box>
+              <Typography
+                sx={{
+                  fontFamily: 'Oswald',
+                  fontSize: '110px',
+                  fontWeight: 500,
+                  lineHeight: '134px',
+                  background: `linear-gradient(to left,${
+                    palette.primary.main
+                  }, ${'#6843EC'})`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                10.2M+
+              </Typography>
+              <Typography variant="body2">Active accounts</Typography>
+            </Box>
+            <Box>
+              <Typography
+                sx={{
+                  fontFamily: 'Oswald',
+                  fontSize: '110px',
+                  fontWeight: 500,
+                  lineHeight: '134px',
+                  background: `linear-gradient(to left,${
+                    palette.primary.main
+                  }, ${'#6843EC'})`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                1000+
+              </Typography>
+              <Typography variant="body2">Topics</Typography>
+            </Box>
+            <Box>
+              <Typography
+                sx={{
+                  fontFamily: 'Oswald',
+                  fontSize: '110px',
+                  fontWeight: 500,
+                  lineHeight: '134px',
+                  background: `linear-gradient(to left,${
+                    palette.primary.main
+                  }, ${'#6843EC'})`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                300+
+              </Typography>
+              <Typography variant="body2">Projects</Typography>
+            </Box>
+          </Stack>
+        </Stack>
+        <Stack gap="80px">
+          <Typography variant="h4">
+            Generate profits from the market place.
+          </Typography>
+          <Box></Box>
         </Stack>
       </Container>
     </Box>
