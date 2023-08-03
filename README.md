@@ -13,7 +13,7 @@ OpenPrompt sets new standards for the prompt market. We want to protect creators
 
 
 
-## Use case
+## Usecase
 
 ![image](https://github.com/SWF2023-CoFFeee/openprompt-client/assets/90181028/65aeb9c8-f0db-4aca-9ed7-74838e08353f)
 
@@ -57,5 +57,17 @@ Fill out `.env`
 ```
 REACT_APP_MAIN_SERVER_URL=${Server URL}
 ```
+
+## Features
+
+- **User System**: Implement registration and login system for users.
+- **NFT Minting for Copyright Registration**: Enable users to register the copyright of their prompts via NFT minting.
+- **Encryption and Decryption in Distributed File System**: Implement encryption and decryption of user's prompts in distributed file system to prevent unauthorized access and leakage.
+- **Text Similarity Check for Copyright Protection**: Implement a feature to check the similarity of prompts' texts to prevent unauthorized secondary creations.
+- **Prompt Sale Posts (CRUD)**: Implement features for users to create, read, update, and delete prompt sale posts.
+- **Market PLP (Product Listing Page) - PDP (Product Detail Page)**: Implement a system that shows product listings and their detailed pages for users to browse and make purchase decisions.
+- **Copyright Ownership Inquiry (Get NFT)**: Enable users to check their owned copyright (NFTs).
+- **Smart Contract for 1:1 Copyright Trade (Transfer NFT)**: Implement a system for users to trade copyright 1:1 via smart contract.
+- **1:N Trading through Ticket Purchase (Transaction)**: Implement a feature for users to conduct 1:N trading of prompts. When a purchase is made (through a transaction), the buyer receives a decryption key which allows them to read the encrypted prompt.
 
 
