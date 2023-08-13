@@ -20,7 +20,7 @@ import { useInputs } from '@/lib/hooks/useInputs';
 import palette from '@/styles/mui/palette';
 import { postSigninData } from '@/lib/apis/user';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
-import { ACCESS_TOKEN_KEY, USERINFO_KEY } from '@/constants/token';
+import { USERINFO_KEY } from '@/constants/token';
 import { TAuthStep } from '.';
 
 export interface ISigninSectionProps {
@@ -28,7 +28,6 @@ export interface ISigninSectionProps {
 }
 
 const SigninSection = ({ onSwitchAuthStep }: ISigninSectionProps) => {
-  const [_token, setToken] = useLocalStorage(ACCESS_TOKEN_KEY, '');
   const [_userinfo, setUserInfo] = useLocalStorage(USERINFO_KEY, '');
 
   const [isMaskingPassword, setIsMaskingPassword] = useState(false);
@@ -45,9 +44,8 @@ const SigninSection = ({ onSwitchAuthStep }: ISigninSectionProps) => {
     e.preventDefault();
     postSigninData(signinFormData)
       .then((res) => {
-        const { token, username } = res.data;
+        const { username } = res.data;
 
-        setToken(token);
         setUserInfo(username);
       })
       .then((_) => {

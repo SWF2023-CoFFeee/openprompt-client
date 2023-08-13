@@ -11,6 +11,8 @@ import {
 } from '@mui/material';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Logout } from '@mui/icons-material';
+import { useCookies } from 'react-cookie';
+
 import { LogoImage } from '@/assets/images';
 
 import RouterMeta from '@/lib/RouterMeta';
@@ -22,6 +24,7 @@ import Logo from '@/assets/svgs/Logo';
 const ResponsiveAppBar = () => {
   const [userAddr, _setUserAddr_, _deleteUserAddr_, clearStorage] =
     useLocalStorage(ADDR_TOKEN_KEY, '');
+  const [token, , removeCookie] = useCookies(['Token']);
 
   const navigate = useNavigate();
 
@@ -30,8 +33,10 @@ const ResponsiveAppBar = () => {
   };
 
   const onLogout = () => {
+    removeCookie('Token', { path: '/' });
     clearStorage();
   };
+  console.log(token);
 
   return (
     <AppBar
