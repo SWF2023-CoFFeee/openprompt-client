@@ -27,6 +27,9 @@ import { useInputs } from '@/lib/hooks/useInputs';
 import { getList, postRegister } from '@/lib/apis/copyright';
 
 const CopyrightRegisterPage = () => {
+  useEffect(() => {
+    getList().then((res) => console.log(res));
+  }, []);
   const navigate = useNavigate();
   const { web3 } = useWeb3();
   const [userAddr] = useLocalStorage(ADDR_TOKEN_KEY, '');
@@ -45,10 +48,7 @@ const CopyrightRegisterPage = () => {
     e: React.FormEvent<HTMLFormElement>,
   ) => {
     e.preventDefault();
-    onMint(
-      'ipfs://QmVbwfFH65T4wBptztFDbeikwAfeBDSyq7y25TH13KJcVn',
-      '111111111111',
-    );
+
     postRegister(copyrightForRegisterFormData).then((res) => {
       const { ipfs_uri, copyright_id } = res.data;
       onMint(ipfs_uri, copyright_id);

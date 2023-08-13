@@ -36,7 +36,6 @@ const ResponsiveAppBar = () => {
     removeCookie('Token', { path: '/' });
     clearStorage();
   };
-  console.log(token);
 
   return (
     <AppBar

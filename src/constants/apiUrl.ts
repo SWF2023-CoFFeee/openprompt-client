@@ -4,3 +4,5 @@ export const TEST_URL = '/api/v2/user/test';
 
 export const DECODE_PROMPT_URL = '/api/v2/copyright';
 export const REGISTER_COPYRIGHT_URL = '/api/v2/copyright';
+
+export const PRODUCT_LIST_URL = '/api/v2/product';
