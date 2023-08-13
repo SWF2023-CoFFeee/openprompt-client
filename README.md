@@ -2,7 +2,7 @@
 
 ![logo](https://github.com/SWF2023-CoFFeee/openprompt-client/assets/90181028/e3f51cb5-570b-47db-8f7f-43296acfa890)
 
-# OpenPrompt
+# OpenPrompt-client
 
 
 </div>
