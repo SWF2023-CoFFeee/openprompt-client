@@ -1,4 +1,4 @@
-import { SIGNUP_URL, SIGNIN_URL } from '@/constants/apiUrl';
+import { SIGNUP_URL, SIGNIN_URL, LOGOUT_URL } from '@/constants/apiUrl';
 import apiClient from './apiClient';
 
 interface ISignupData {
@@ -36,5 +36,12 @@ export const postSigninData = ({ username, password }: ISigninData) => {
       password,
       username,
     },
+  });
+};
+
+export const getLogout = () => {
+  return apiClient({
+    method: 'get',
+    url: LOGOUT_URL,
   });
 };
