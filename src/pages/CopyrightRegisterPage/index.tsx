@@ -10,9 +10,7 @@ import {
   RadioGroup,
   FormControl,
   Button,
-  Icon,
 } from '@mui/material';
-import { WarningAmber } from '@mui/icons-material';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Template from '@/components/common/CustomUI/template';
@@ -20,27 +18,30 @@ import palette from '@/styles/mui/palette';
 import theme from '@/styles/mui/theme';
 import { useWeb3 } from '@/lib/hooks/useWeb3';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
-import { ADDR_TOKEN_KEY, ACCESS_TOKEN_KEY } from '@/constants/token';
+import { ADDR_TOKEN_KEY } from '@/constants/token';
 import { CoffeeeAbi, CONTRACT_ADDR } from '@/lib/abis/OpenPromptABI';
 import CustomNoMaxWidthTooltip from '@/components/common/CustomUI/card/CustomNoMaxWidthTooltip';
 import { useInputs } from '@/lib/hooks/useInputs';
-import { getList, postRegister } from '@/lib/apis/copyright';
+import { postRegister } from '@/lib/apis/copyright';
+import { getProductList } from '@/lib/apis/product';
 
 const CopyrightRegisterPage = () => {
+  // TODO: Debugging
   useEffect(() => {
-    getList().then((res) => console.log(res));
+    getProductList().then((res) => console.log(res));
   }, []);
+
   const navigate = useNavigate();
   const { web3 } = useWeb3();
   const [userAddr] = useLocalStorage(ADDR_TOKEN_KEY, '');
   const [copyrightForRegisterFormData, onChangeCopyrightForRegisterFormData] =
     useInputs<{
       prompt: string;
-      ai_type: string;
+      AI_type: string;
       copyright_title: string;
     }>({
       prompt: '',
-      ai_type: '',
+      AI_type: '',
       copyright_title: '',
     });
 
@@ -223,8 +224,8 @@ const CopyrightRegisterPage = () => {
               <RadioGroup
                 row
                 aria-labelledby="demo-row-radio-buttons-group-label"
-                name="ai_type"
-                value={copyrightForRegisterFormData.ai_type}
+                name="AI_type"
+                value={copyrightForRegisterFormData.AI_type}
                 onChange={onChangeCopyrightForRegisterFormData}
               >
                 <FormControlLabel

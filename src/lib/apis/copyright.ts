@@ -1,28 +1,13 @@
-import {
-  REGISTER_COPYRIGHT_URL,
-  DECODE_PROMPT_URL,
-  PRODUCT_LIST_URL,
-} from '@/constants/apiUrl';
+import { REGISTER_COPYRIGHT_URL, DECODE_PROMPT_URL } from '@/constants/apiUrl';
 import apiClient from './apiClient';
 
-export const getList = () => {
-  return apiClient({
-    method: 'get',
-    url: PRODUCT_LIST_URL,
-    withCredentials: true,
-    params: {
-      product_type: 'copyright',
-    },
-  });
-};
-
 interface IPostRegisterBody {
-  ai_type: string;
+  AI_type: string;
   copyright_title: string;
   prompt: string;
 }
 export const postRegister = ({
-  ai_type,
+  AI_type,
   copyright_title,
   prompt,
 }: IPostRegisterBody) => {
@@ -31,7 +16,7 @@ export const postRegister = ({
     url: REGISTER_COPYRIGHT_URL,
     withCredentials: true,
     data: {
-      ai_type,
+      AI_type,
       copyright_title,
       prompt,
     },
