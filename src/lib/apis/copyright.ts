@@ -23,6 +23,30 @@ export const postRegister = ({
   });
 };
 
+export const postRegisterWithFetch = async ({
+  AI_type,
+  copyright_title,
+  prompt,
+}: IPostRegisterBody) => {
+  const response = await fetch(
+    `https://localhost:8081${REGISTER_COPYRIGHT_URL}`,
+    {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        AI_type,
+        copyright_title,
+        prompt,
+      }),
+    },
+  );
+
+  return response.json();
+};
+
 interface IGetDecodedPromptParams {
   copyrightId: string;
 }

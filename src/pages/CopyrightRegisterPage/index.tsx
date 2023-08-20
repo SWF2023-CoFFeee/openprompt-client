@@ -22,7 +22,7 @@ import { ADDR_TOKEN_KEY } from '@/constants/token';
 import { CoffeeeAbi, CONTRACT_ADDR } from '@/lib/abis/OpenPromptABI';
 import CustomNoMaxWidthTooltip from '@/components/common/CustomUI/card/CustomNoMaxWidthTooltip';
 import { useInputs } from '@/lib/hooks/useInputs';
-import { postRegister } from '@/lib/apis/copyright';
+import { postRegister, postRegisterWithFetch } from '@/lib/apis/copyright';
 import { getProductList } from '@/lib/apis/product';
 
 const CopyrightRegisterPage = () => {
