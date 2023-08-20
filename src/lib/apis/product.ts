@@ -7,7 +7,7 @@ export const getProductList = () => {
     url: PRODUCT_LIST_URL,
     withCredentials: true,
     params: {
-      proexportduct_type: 'copyright',
+      product_type: 'copyright',
     },
   });
 };
