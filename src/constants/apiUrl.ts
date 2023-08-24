@@ -7,4 +7,6 @@ export const DECODE_PROMPT_URL = '/api/v2/copyright';
 export const REGISTER_COPYRIGHT_URL = '/api/v2/copyright';
 
 export const PRODUCT_LIST_URL = '/api/v2/product';
-export const SELL_PRODUCT_URL = '/api/v2/product/ticket';
+export const REGISTER_PRODUCT_URL = '/api/v2/product/ticket';
+export const BUY_COPYRIGHT_URL = '/api/v2/product/copyright';
+export const BUY_TICKET_URL = '/api/v2/product/copyright';

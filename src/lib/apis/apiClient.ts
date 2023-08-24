@@ -3,7 +3,6 @@ import axios, {
   InternalAxiosRequestConfig,
   AxiosError,
 } from 'axios';
-import { ACCESS_TOKEN_KEY } from '@/constants/token';
 import { SERVER_URL } from '@/constants/config';
 
 const host = SERVER_URL;

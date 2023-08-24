@@ -27,9 +27,13 @@ interface ISigninData {
   password: string;
   username: string;
 }
-
 export const postSigninData = ({ username, password }: ISigninData) => {
-  return apiClient({
+  return apiClient.request<{
+    role: 'ADMIN' | 'USER';
+    token: string;
+    user_id: number;
+    username: string;
+  }>({
     method: 'post',
     url: SIGNIN_URL,
     data: {
