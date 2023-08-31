@@ -22,7 +22,7 @@ import { ADDR_TOKEN_KEY } from '@/constants/token';
 import { CoffeeeAbi, CONTRACT_ADDR } from '@/lib/abis/OpenPromptABI';
 import CustomNoMaxWidthTooltip from '@/components/common/CustomUI/card/CustomNoMaxWidthTooltip';
 import { useInputs } from '@/lib/hooks/useInputs';
-import { postRegister, postRegisterWithFetch } from '@/lib/apis/copyright';
+import { postRegister } from '@/lib/apis/copyright';
 import { getProductList } from '@/lib/apis/product';
 
 const CopyrightRegisterPage = () => {
@@ -37,12 +37,12 @@ const CopyrightRegisterPage = () => {
   const [copyrightForRegisterFormData, onChangeCopyrightForRegisterFormData] =
     useInputs<{
       prompt: string;
-      AI_type: string;
-      copyright_title: string;
+      AIType: string;
+      copyrightTitle: string;
     }>({
       prompt: '',
-      AI_type: '',
-      copyright_title: '',
+      AIType: '',
+      copyrightTitle: '',
     });
 
   const onSubmitCopyrightForRegisterFormData = (
@@ -224,8 +224,8 @@ const CopyrightRegisterPage = () => {
               <RadioGroup
                 row
                 aria-labelledby="demo-row-radio-buttons-group-label"
-                name="AI_type"
-                value={copyrightForRegisterFormData.AI_type}
+                name="AIType"
+                value={copyrightForRegisterFormData.AIType}
                 onChange={onChangeCopyrightForRegisterFormData}
               >
                 <FormControlLabel
@@ -291,8 +291,8 @@ const CopyrightRegisterPage = () => {
               <Typography variant="body5">Copyright Name</Typography>
               <TextField
                 variant="outlined"
-                name="copyright_title"
-                value={copyrightForRegisterFormData.copyright_title}
+                name="copyrightTitle"
+                value={copyrightForRegisterFormData.copyrightTitle}
                 onChange={onChangeCopyrightForRegisterFormData}
               />
             </Box>

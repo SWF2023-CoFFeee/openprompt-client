@@ -1,4 +1,4 @@
-export const CONTRACT_ADDR = '0xF35dcCA334A4f70d83e8aCa0Ea440e8dEf3FD298';
+export const CONTRACT_ADDR = '0x033ca17D816e1bF2Eeb6168Eca954dAbAECC6B4a';
 
 export const CoffeeeAbi = [
   {

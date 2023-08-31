@@ -2,13 +2,13 @@ import { REGISTER_COPYRIGHT_URL, DECODE_PROMPT_URL } from '@/constants/apiUrl';
 import apiClient from './apiClient';
 
 interface IPostRegisterBody {
-  AI_type: string;
-  copyright_title: string;
   prompt: string;
+  AIType: string;
+  copyrightTitle: string;
 }
 export const postRegister = ({
-  AI_type,
-  copyright_title,
+  AIType,
+  copyrightTitle,
   prompt,
 }: IPostRegisterBody) => {
   return apiClient({
@@ -16,8 +16,8 @@ export const postRegister = ({
     url: REGISTER_COPYRIGHT_URL,
     withCredentials: true,
     data: {
-      AI_type,
-      copyright_title,
+      AI_type: AIType,
+      copyright_title: copyrightTitle,
       prompt,
     },
   });
