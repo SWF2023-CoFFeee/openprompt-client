@@ -8,7 +8,7 @@ const styles = {
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     color: 'white',
-    backgroundImage: 'url(/imgs/gradient.jpg)',
+    backgroundImage: 'url(/images/gradient.jpg)',
   },
 };
 

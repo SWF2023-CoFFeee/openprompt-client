@@ -28,7 +28,7 @@ const BackgroundAnimation: React.FC<IBackgroundProps> = ({
 }) => {
   return (
     <BackgroundBasic color={color} sx={sx}>
-      <AnimatedSymbol src="/imgs/symbolGradient.svg" />
+      <AnimatedSymbol src="/images/symbolGradient.svg" />
       {children}
     </BackgroundBasic>
   );

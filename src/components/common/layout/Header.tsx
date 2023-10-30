@@ -12,8 +12,6 @@ import {
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Logout } from '@mui/icons-material';
 
-import { LogoImage } from '@/assets/images';
-
 import RouterMeta from '@/lib/RouterMeta';
 import palette from '@/styles/mui/palette';
 import { ADDR_TOKEN_KEY } from '@/constants/token';
@@ -53,7 +51,12 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 1, marginLeft: '30px' }}>
             <NavLink to={'/'}>
               <Stack direction="row" alignItems="center" gap="8px">
-                <img src={LogoImage} alt="home" width="44px" height="44px" />
+                <img
+                  src={'/images/logo.png'}
+                  alt="home"
+                  width="44px"
+                  height="44px"
+                />
                 <Logo />
               </Stack>
             </NavLink>

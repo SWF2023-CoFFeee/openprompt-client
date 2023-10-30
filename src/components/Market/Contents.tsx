@@ -136,11 +136,10 @@ const CardExample: React.FC<ICardExampleProps> = ({ product, index }) => {
         maxHeight: '300px',
         borderRadius: '0.8rem',
       }}
-      onClick={() => console.log('111')}
     >
       <Box
         sx={{
-          backgroundImage: `url(/imgs/${index + 1}.jpg)`,
+          backgroundImage: `url(/images/${index + 1}.jpg)`,
           display: 'flex',
           width: '300px',
           height: '300px',

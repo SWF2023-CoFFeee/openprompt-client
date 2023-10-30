@@ -200,7 +200,7 @@ const CopyrightRegisterPage = () => {
                     <InputAdornment position="start">
                       <Box sx={{ paddingLeft: '10px', marginTop: '6px' }}>
                         <img
-                          src="/imgs/meta-logo.png"
+                          src="/images/meta-logo.png"
                           width="24"
                           height="24"
                           alt="Ethereum Logo"

@@ -1,16 +1,10 @@
-import {
-  Button,
-  Box,
-  Typography,
-  TextField,
-  TextareaAutosize,
-} from '@mui/material';
+import { Button, Box, Typography } from '@mui/material';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Lottie from 'react-lottie';
 import palette from '@/styles/mui/palette';
 import Template from '@/components/common/CustomUI/template';
 import RouterMeta from '@/lib/RouterMeta';
-import successLottie from './openprompt_success.json';
+import successLottie from '@/lib/lottie/openprompt_success.json';
 
 export const SUCCESS_TYPE = ['copyright_regist', 'copyright_buy', 'ticket_buy'];
 type TransActionVariant = 'copyright_regist' | 'copyright_buy' | 'ticket_buy';
@@ -47,9 +41,6 @@ const LottieComponent: React.FC<any> = ({ variant, state }) => {
       successType = 'Ticket purchase complete!';
       break;
   }
-
-  const data_copyright_name = '';
-  const data_prompt = '';
 
   const defaultOptions = {
     loop: false,

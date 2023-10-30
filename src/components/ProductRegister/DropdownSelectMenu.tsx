@@ -13,7 +13,7 @@ import palette from '@/styles/mui/palette';
 const ArrowIcon = () => {
   return (
     <img
-      src="/imgs/dropdown-icon.png"
+      src="/images/dropdown-icon.png"
       width="24"
       height="24"
       alt="Ethereum Logo"

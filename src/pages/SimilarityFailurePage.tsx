@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 import Template from '@/components/common/CustomUI/template';
 import palette from '@/styles/mui/palette';
 import RouterMeta from '@/lib/RouterMeta';
-import failLottie from './openprompt_fail.json';
+import failLottie from '@/lib/lottie/openprompt_fail.json';
 
 const SimilarityFailurePage = () => {
   return (

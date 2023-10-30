@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { Typography } from '@mui/material';
 import React from 'react';
 import Template from '@/components/common/CustomUI/template';
-import SignupSection from './SignupSection';
-import SigninSection from './SigninSection';
-import ConnectAddrSection from './ConnectAddrSection';
+import SignupSection from '../components/Auth/SignupSection';
+import SigninSection from '../components/Auth/SigninSection';
+import ConnectAddrSection from '../components/Auth/ConnectAddrSection';
 
 export type TAuthStep = 'Sign up' | 'Sign in' | 'Connect Wallet';
 export interface IAuthStepProperty {

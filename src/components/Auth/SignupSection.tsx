@@ -19,7 +19,7 @@ import { useInputs } from '@/lib/hooks/useInputs';
 import theme from '@/styles/mui/theme';
 import palette from '@/styles/mui/palette';
 import { postSignupData } from '@/lib/apis/user';
-import { TAuthStep } from '.';
+import { TAuthStep } from '../../pages/AuthPage';
 
 export interface ISignupSectionProps {
   onSwitchAuthStep: (key: TAuthStep) => void;

@@ -21,7 +21,7 @@ import palette from '@/styles/mui/palette';
 import { postSigninData } from '@/lib/apis/user';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
 import { USERINFO_KEY } from '@/constants/token';
-import { TAuthStep } from '.';
+import { TAuthStep } from '../../pages/AuthPage';
 
 export interface ISigninSectionProps {
   onSwitchAuthStep: (key: TAuthStep) => void;
