@@ -1,6 +1,5 @@
 import { Stack, Button, Typography } from '@mui/material';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { MetaMaskImage } from '@/assets/images';
 import { useWeb3 } from '@/lib/hooks/useWeb3';
 import RouterMeta from '@/lib/RouterMeta';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
@@ -41,7 +40,7 @@ const ConnectAddrSection = ({ onSwitchAuthStep }: IConnectAddrSectionProps) => {
           }}
         >
           <img
-            src={MetaMaskImage}
+            src={'/images/metamask.png'}
             alt="MetaMaskIcon"
             style={{ marginRight: '16px' }}
           />
