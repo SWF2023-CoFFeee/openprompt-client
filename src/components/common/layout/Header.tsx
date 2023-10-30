@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Logout } from '@mui/icons-material';
+
 import { LogoImage } from '@/assets/images';
 
 import RouterMeta from '@/lib/RouterMeta';
@@ -18,6 +19,7 @@ import palette from '@/styles/mui/palette';
 import { ADDR_TOKEN_KEY } from '@/constants/token';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
 import Logo from '@/assets/svgs/Logo';
+import { getLogout } from '@/lib/apis/user';
 
 const ResponsiveAppBar = () => {
   const [userAddr, _setUserAddr_, _deleteUserAddr_, clearStorage] =
@@ -30,6 +32,7 @@ const ResponsiveAppBar = () => {
   };
 
   const onLogout = () => {
+    getLogout();
     clearStorage();
   };
 

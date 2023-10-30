@@ -23,3 +23,11 @@ yarn-debug.log*
 yarn-error.log*
 
 .env
+*.pem
+
+typechain
+typechain-types
+
+# Hardhat files
+cache
+artifacts

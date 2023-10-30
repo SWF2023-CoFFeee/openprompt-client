@@ -19,7 +19,7 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@types/react-router-dom": "^5.3.3",
-    "axios": "^1.2.4",
+    "axios": "^1.4.0",
     "ganache-cli": "^6.12.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -31,15 +31,23 @@
     "slick-carousel": "^1.8.1",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0",
-    "web3": "^4.0.3"
+    "web3": "^4.0.3",
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "@openzeppelin/contracts": "^4.9.3",
+    "dotenv": "^16.3.1",
+    "hardhat": "^2.17.0"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "npm run migrate && craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
     "prepare": "husky install",
-    "ganache": "npx ganache-cli --chainId 7722"
+    "ganache": "npx ganache-cli --chainId 7722",
+    "start:https": "npm run migrate && HTTPS=true SSL_CRT_FILE=localhost.pem SSL_KEY_FILE=localhost-key.pem craco start",
+    "hardhat": "hardhat",
+    "compile": "npx hardhat compile",
+    "migrate": "npx hardhat run --network ganache ./scripts/deploy.ts"
   },
   "eslintConfig": {
     "extends": [
@@ -69,6 +77,11 @@
     "eslint-plugin-react": "^7.32.2",
     "husky": "^8.0.0",
     "prettier": "^2.8.4",
-    "tsconfig-paths-webpack-plugin": "^4.0.0"
+    "tsconfig-paths-webpack-plugin": "^4.0.0",
+    "@typechain/ethers-v6": "^0.4.3",
+    "@typechain/hardhat": "^8.0.3",
+    "ts-generator": "^0.1.1",
+    "ts-node": "^10.9.1",
+    "typechain": "^8.3.1"
   }
 }

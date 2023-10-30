@@ -3,13 +3,13 @@ import axios, {
   InternalAxiosRequestConfig,
   AxiosError,
 } from 'axios';
-import { ACCESS_TOKEN_KEY } from '@/constants/token';
 import { SERVER_URL } from '@/constants/config';
 
 const host = SERVER_URL;
 
 const apiClient = axios.create({
   baseURL: host,
+  withCredentials: true,
 });
 
 const logOnDev = (
@@ -22,13 +22,7 @@ const logOnDev = (
 };
 
 apiClient.interceptors.request.use((request) => {
-  const jwtToken: string | null = window.localStorage.getItem(ACCESS_TOKEN_KEY);
-  console.log(jwtToken);
   const { method, url } = request;
-
-  // if (jwtToken) {
-  //   request.headers['Authorization'] = `Token ${jwtToken}`;
-  // }
 
   logOnDev(`🚀 [${method?.toUpperCase()}] ${url} | Request`, request);
 
