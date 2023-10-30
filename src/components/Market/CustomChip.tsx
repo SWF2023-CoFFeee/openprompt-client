@@ -4,7 +4,7 @@ import palette from '@/styles/mui/palette';
 const StableDiffusionICon = () => {
   return (
     <img
-      src="/imgs/stable-diffusion-logo.png"
+      src="/images/stable-diffusion-logo.png"
       width="18"
       height="18"
       alt="Stable Diffusion Logo"

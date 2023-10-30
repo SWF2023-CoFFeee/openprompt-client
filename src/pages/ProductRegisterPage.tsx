@@ -19,12 +19,17 @@ import CustomNoMaxWidthTooltip from '@/components/common/CustomUI/card/CustomNoM
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
 import { ADDR_TOKEN_KEY } from '@/constants/token';
 import { useInputs } from '@/lib/hooks/useInputs';
-import ImageBox from './ImageBox';
-import DropdownSelectMenu from './DropdownSelectMenu';
+import ImageBox from '../components/ProductRegister/ImageBox';
+import DropdownSelectMenu from '../components/ProductRegister/DropdownSelectMenu';
 
 const MetaIcon = () => {
   return (
-    <img src="/imgs/meta-logo.png" width="24" height="24" alt="Ethereum Logo" />
+    <img
+      src="/images/meta-logo.png"
+      width="24"
+      height="24"
+      alt="Ethereum Logo"
+    />
   );
 };
 
@@ -241,7 +246,7 @@ const ProductRegisterPage = () => {
                       <InputAdornment position="start">
                         <Box sx={{ paddingLeft: '10px', marginTop: '6px' }}>
                           <img
-                            src="/imgs/eth-logo.png"
+                            src="/images/eth-logo.png"
                             width="17"
                             height="24"
                             alt="Ethereum Logo"

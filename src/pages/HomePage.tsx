@@ -46,7 +46,7 @@ const HomePage = () => {
               sx={{
                 backgroundSize: 'cover',
                 height: '100vh',
-                backgroundImage: `url('/imgs/landingThumbnails/${thumb}.jpg')`,
+                backgroundImage: `url('/images/landingThumbnails/${thumb}.jpg')`,
               }}
             />
           ))}

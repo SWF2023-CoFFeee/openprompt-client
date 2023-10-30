@@ -11,7 +11,7 @@ import {
 import CustomCardOutlinedGradient from '@/components/common/CustomUI/card/CustomCardOutlinedGradient';
 import CustomCardOutlinedRounded from '@/components/common/CustomUI/card/CustomCardOutlinedRounded';
 import palette from '@/styles/mui/palette';
-import CustomChip from '../MarketPage/CustomChip';
+import CustomChip from '../Market/CustomChip';
 import sampleImg from './sample-img.png';
 
 const ContentDonateHistory = () => {
@@ -35,7 +35,12 @@ const ContentDonateHistory = () => {
 
 const EthereumIcon = () => {
   return (
-    <img src="/imgs/eth-logo.png" width="13" height="22" alt="Ethereum Logo" />
+    <img
+      src="/images/eth-logo.png"
+      width="13"
+      height="22"
+      alt="Ethereum Logo"
+    />
   );
 };
 

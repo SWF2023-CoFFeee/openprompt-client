@@ -16,7 +16,7 @@ import palette from '@/styles/mui/palette';
 const StableDiffusionICon = () => {
   return (
     <img
-      src="/imgs/stable-diffusion-logo.png"
+      src="/images/stable-diffusion-logo.png"
       width="24"
       height="24"
       alt="Stable Diffusion Logo"
@@ -27,7 +27,7 @@ const StableDiffusionICon = () => {
 const EthereumIcon = () => {
   return (
     <img
-      src="/imgs/eth-logo.png"
+      src="/images/eth-logo.png"
       width="22"
       height="35.83"
       alt="Ethereum Logo"

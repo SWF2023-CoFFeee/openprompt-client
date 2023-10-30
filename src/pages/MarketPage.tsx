@@ -7,9 +7,9 @@ import RouterMeta from '@/lib/RouterMeta';
 import {
   mockRightsOfUsageProductData,
   mockCopyrightProductData,
-} from '../../mocks/mockData';
-import CustomTabs from '../../components/common/CustomUI/tabs/CustomTabs';
-import { ContentTicket, ContentCopyRight } from './Contents';
+} from '../mocks/mockData';
+import CustomTabs from '../components/common/CustomUI/tabs/CustomTabs';
+import { ContentTicket, ContentCopyRight } from '../components/Market/Contents';
 
 type CheckedState = {
   All: boolean;

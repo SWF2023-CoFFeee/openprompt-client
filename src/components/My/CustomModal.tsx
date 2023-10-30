@@ -13,11 +13,16 @@ import {
 import GetAppIcon from '@mui/icons-material/GetApp';
 import ClearIcon from '@mui/icons-material/Clear';
 import theme from '@/styles/mui/theme';
-import CustomChip from '../MarketPage/CustomChip';
+import CustomChip from '../Market/CustomChip';
 import sampleImg from './sample-img.png';
 const EthereumIcon = () => {
   return (
-    <img src="/imgs/eth-logo.png" width="13" height="22" alt="Ethereum Logo" />
+    <img
+      src="/images/eth-logo.png"
+      width="13"
+      height="22"
+      alt="Ethereum Logo"
+    />
   );
 };
 

@@ -9,8 +9,8 @@ import {
   ContentDonateHistory,
   ContentOwnNFT,
   ContentPersonalInfo,
-} from './Contents';
-import CustomModal from './CustomModal';
+} from '../components/My/Contents';
+import CustomModal from '../components/My/CustomModal';
 
 const MyPage = () => {
   const [content, setContent] = useState<ContentType>('purchasedTickets');

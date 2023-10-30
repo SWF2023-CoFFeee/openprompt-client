@@ -5,7 +5,7 @@ import { useWeb3 } from '@/lib/hooks/useWeb3';
 import RouterMeta from '@/lib/RouterMeta';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
 import { ADDR_TOKEN_KEY } from '@/constants/token';
-import { TAuthStep } from '.';
+import { TAuthStep } from '../../pages/AuthPage';
 export interface IConnectAddrSectionProps {
   onSwitchAuthStep: (key: TAuthStep) => void;
 }
