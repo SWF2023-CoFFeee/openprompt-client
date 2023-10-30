@@ -4,13 +4,11 @@
 
 # OpenPrompt-client
 
-
 </div>
-
 
 OpenPrompt sets new standards for the prompt market. We want to protect creators through Web 3.0 and technology to induce a virtuous cycle structure in the marketplace.
 
-## Terminology 
+## Terminology
 
 <dl>
   <dt>Prompt</dt>
@@ -29,8 +27,7 @@ OpenPrompt sets new standards for the prompt market. We want to protect creators
 
   <dt>Ticket</dt>
   <dd>A ticket buyer receives a key that can decrypt the prompt, allowing them to read the prompt. This process enables transactions beyond 1:1 trades, supporting 1:N trades.</dd>
- 
- 
+
 <dl>
 
 ## Features
@@ -44,7 +41,6 @@ OpenPrompt sets new standards for the prompt market. We want to protect creators
 - **Copyright Ownership Inquiry (Get NFT)**: Enable users to check their owned copyright (NFTs).
 - **Smart Contract for 1:1 Copyright Trade (Transfer NFT)**: Implement a system for users to trade copyright 1:1 via smart contract.
 - **1:N Trading through Ticket Purchase (Transaction)**: Implement a feature for users to conduct 1:N trading of prompts. When a purchase is made (through a transaction), the buyer receives a decryption key which allows them to read the encrypted prompt.
-
 
 ## Usecase
 
@@ -66,16 +62,18 @@ Through this, we want to overcome the limitations of NFTs as well as the new Pro
 npm install
 ```
 
-#### Start
-
-```
-npm start
-```
-
-####  Run Ethereum Network for Dev 
+#### Run Ethereum Network for Dev
 
 ```
 npm run ganache
+```
+
+#### Start
+
+Run clients concurrently with contract compilation & migration
+
+```
+npm run start:https
 ```
 
 #### Build
@@ -86,13 +84,13 @@ npm build
 
 #### env
 
-Fill out `.env` 
+Fill out `.env`
+
 ```
 REACT_APP_MAIN_SERVER_URL=${Server URL}
 ```
 
 ## Team
-
 
 This project was created by the CoFFeee team at the [2023 Seoul Web 3.0 Festival](https://www.seoulweb3festival.com/):
 
