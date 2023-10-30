@@ -136,7 +136,6 @@ const CardExample: React.FC<ICardExampleProps> = ({ product, index }) => {
         maxHeight: '300px',
         borderRadius: '0.8rem',
       }}
-      onClick={() => console.log('111')}
     >
       <Box
         sx={{
